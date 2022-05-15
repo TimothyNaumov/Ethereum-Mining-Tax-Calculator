@@ -1,32 +1,31 @@
-import React, { Component, useContext } from 'react';
+import React, { Component, useContext, useEffect, useState } from 'react';
 import { Card } from '@nextui-org/react';
-import BalanceContext from './balance-context';
-/*
-class BalanceBox extends Component {
-    constructor(props) {
-        super(props);
-        const Balance = useContext(BalanceContext)
-        this.state = {
-            balance: 1
-        }
-    }
+import {useAddress, useAddressUpdate} from './AddressContext';
 
-    render() { 
-        return (
-            <Card bordered shadow={false} hoverable css={{ mw: "400px" }}>
-                <p>Balance: {Balance}</p>
-            </Card>
-        );
-    }
-}
-*/
+import { subscribe } from './pubsub';
+import { useFilter } from '@nextui-org/react/node_modules/@react-aria/i18n';
+import { AddressEnteredEvent } from './project-events';
 
 const BalanceBox = () => {
-    const bal = useContext(BalanceContext)
+    const [balance, setBalance] = useState(0);
+    const address = useAddress();
+
+    useEffect(() => {
+        console.log(`Balance Box Component has been rerendered with address ${address}`)
+        const handle = subscribe(AddressEnteredEvent, (inputAddress) => {
+            fetch(`http://localhost:4000/accountbalance?address=${address}`)
+            .then(response => response.json())
+            .then(data => setBalance(data))
+        });
+
+        return function cleanup(){
+            handle.unsubscribe()
+        }
+    })
 
     return (
         <Card bordered shadow={false} hoverable css={{ mw: "400px" }}>
-            <p>Balance: {bal}</p>
+            <p>Balance: {balance} eth</p>
         </Card>
     );
 };

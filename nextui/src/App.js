@@ -2,24 +2,27 @@ import ReactDOM from 'react-dom';
 import React, { useState } from 'react';
 
 import './App.css';
-import AddressBox from './Components/AddressBox';
+import AddressInput from './Components/AddressInput';
 import BalanceBox from './Components/BalanceBox';
 import BalanceContext from "./Components/balance-context";
+import { BalanceProvider } from './Components/balance-context';
+import { AddressProvider } from './Components/AddressContext';
+import AddressBox from './Components/AddressBox';
 
 
 
 const App = () => {
 
-  const Balance = useState(69);
-  const value = Balance
+  //const Balance = useState(69);
+  //const value = Balance
 
   return (
-    <div>
-      <AddressBox/>
-      <BalanceContext.Provider value={value}>
+    <div >
+      <AddressProvider>
+        <AddressInput/>
+        <AddressBox/>
         <BalanceBox/>
-      </BalanceContext.Provider>
-      
+      </AddressProvider>
     </div>
     
   );
