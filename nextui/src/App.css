@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.addressInputBox{
+  display:inline-flex;
+  flex-direction:row;
+}
+
+.addressDisplayBox{
+  padding: 10 10 10 10;
+}
+
+.transactionBox{
+  height: auto;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}

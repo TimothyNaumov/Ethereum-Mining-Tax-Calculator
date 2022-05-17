@@ -3,6 +3,7 @@ import { Input } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
 import React, { useContext, useEffect, useState } from "react";
 import {useAddress, useAddressUpdate} from './AddressContext';
+import '../App.css';
 
 import {AddressEnteredEvent} from './project-events';
 
@@ -21,16 +22,11 @@ function AddressInput(){
     e.preventDefault();
     updateAddress(address);
     publish(new AddressEnteredEvent({inputAddress: address}));
-    //const setBalance = useContext(BalanceContext);
-    //fetch('http://localhost:4000/accountbalance')
-    //.then(response => response.json())
-    //.then(data => setBalance(data))
-    //.then(alert(`You address is ${address} and it has a balance of ${balance} eth`));
   }
 
   return(
-    <div>
-      <Input placeholder="Ethereum Public Address" onChange={handleChange} width="1200px" size='xl' />
+    <div className='addressInputBox'>
+      <Input placeholder="Ethereum Public Address" onChange={handleChange} width="470px" size='xl' />
       <Button onClick={onSubmit} size='xl'>Submit</Button>
     </div>
   )

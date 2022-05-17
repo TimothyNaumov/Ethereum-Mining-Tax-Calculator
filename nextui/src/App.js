@@ -4,27 +4,27 @@ import React, { useState } from 'react';
 import './App.css';
 import AddressInput from './Components/AddressInput';
 import BalanceBox from './Components/BalanceBox';
-import BalanceContext from "./Components/balance-context";
-import { BalanceProvider } from './Components/balance-context';
 import { AddressProvider } from './Components/AddressContext';
 import AddressBox from './Components/AddressBox';
+import Header from './Components/Header'
+import GlobalStyles from './Components/styles/Global';
+import TransactionBox from './Components/TransactionBox';
 
 
 
 const App = () => {
 
-  //const Balance = useState(69);
-  //const value = Balance
-
   return (
-    <div >
+    <div>
+      <GlobalStyles/>
+      <Header/>
       <AddressProvider>
         <AddressInput/>
         <AddressBox/>
         <BalanceBox/>
+        <TransactionBox/>
       </AddressProvider>
     </div>
-    
   );
 };
 
