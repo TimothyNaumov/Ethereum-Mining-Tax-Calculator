@@ -5,6 +5,7 @@ import React, { useContext, useEffect, useState } from "react";
 import {useAddress, useAddressUpdate} from './AddressContext';
 import '../App.css';
 
+
 import {AddressEnteredEvent} from './project-events';
 
 import {publish} from './pubsub';
@@ -25,11 +26,31 @@ function AddressInput(){
   }
 
   return(
-    <div className='addressInputBox'>
+    <form>
+      <div class="form-group">
+        <label for="exampleInputEmail1">Public Ethereum Wallet Address</label>
+        <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="Enter Ethereum Wallet Address"></input>
+        <small id="emailHelp" class="form-text text-muted">All the information will display using this address</small>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  );
+};
+
+export default AddressInput;
+
+/*
+<div className='addressInputBox'>
       <Input placeholder="Ethereum Public Address" onChange={handleChange} width="470px" size='xl' />
       <Button onClick={onSubmit} size='xl'>Submit</Button>
-    </div>
-  )
-}
+    </div> 
+
+
+<form>
+      <div class="form-group">
+        <label for="inputAddress">Ethereum Wallet Address</label>
+        <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeHolder="Enter Ethereum Wallet Address">
+      </div>
+    </form>
+*/
  
-export default AddressInput;
