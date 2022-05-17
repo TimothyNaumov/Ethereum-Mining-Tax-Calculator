@@ -19,9 +19,23 @@ const App = () => {
       <GlobalStyles/>
       <Header/>
       <AddressProvider>
-        <AddressInput/>
-        <AddressBox/>
-        <BalanceBox/>
+      <div className='container-fluid'>
+          
+        </div>
+        
+        <div className='container-fluid'>
+          <div className='row'>
+            <div className='col'>
+              <AddressInput/>
+            </div>
+            <div className='col'>
+              <AddressBox/>
+              <BalanceBox/>
+            </div>
+          </div>
+          
+        </div>
+        
         <TransactionBox/>
       </AddressProvider>
     </div>

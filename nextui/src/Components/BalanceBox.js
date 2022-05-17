@@ -22,11 +22,18 @@ const BalanceBox = () => {
 
     return (
         <div className='addressDisplayBox'>
-            <Card bordered shadow={false} hoverable css={{ mw: "400px" }}>
-                <p>Balance: {balance} eth</p>
-            </Card>
+            <div className='card'>
+                <div className='card-body'>
+                    <p>Balance: {balance} eth</p>
+                </div>
+            </div>
         </div>
     );
 };
 
 export default BalanceBox;
+/*
+<Card bordered shadow={false} hoverable css={{ mw: "400px" }}>
+                <p>Balance: {balance} eth</p>
+            </Card>
+            */

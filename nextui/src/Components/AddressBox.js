@@ -6,10 +6,17 @@ const AddressBox = () => {
     const addressContext = useAddress();
 
     return (
-        <Card bordered shadow={false} hoverable css={{ mw: "400px" }}>
-            <p>Wallet Address: {addressContext}</p>
-        </Card>
+        <div className='card'>
+            <div className='card-body'>
+                <p>Wallet Address: {addressContext} eth</p>
+            </div>
+        </div>
     );
 };
  
 export default AddressBox;
+/*
+<Card bordered shadow={false} hoverable css={{ mw: "400px" }}>
+            <p>Wallet Address: {addressContext}</p>
+        </Card>
+        */

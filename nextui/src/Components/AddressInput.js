@@ -28,11 +28,20 @@ function AddressInput(){
   return(
     <form>
       <div class="form-group">
-        <label for="exampleInputEmail1">Public Ethereum Wallet Address</label>
-        <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="Enter Ethereum Wallet Address"></input>
-        <small id="emailHelp" class="form-text text-muted">All the information will display using this address</small>
+      <label for="exampleInputEmail1">Public Ethereum Wallet Address</label>
+        <div className='row'>
+          <div className='col'>
+            
+            <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="Enter Ethereum Wallet Address"></input>
+            <small id="emailHelp" class="form-text text-muted">All the information will display using this address</small>
+          </div>
+          <div className='col'>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+        
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      
     </form>
   );
 };
