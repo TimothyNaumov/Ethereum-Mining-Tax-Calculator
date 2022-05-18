@@ -20,21 +20,16 @@ const App = () => {
       <Header/>
       <AddressProvider>
       <div className='container-fluid'>
-          
-        </div>
-        
-        <div className='container-fluid'>
-          <div className='row'>
-            <div className='col'>
-              <AddressInput/>
-            </div>
-            <div className='col'>
-              <AddressBox/>
-              <BalanceBox/>
-            </div>
+        <div className='row'>
+          <div className='col'>
+            <AddressInput/>
           </div>
-          
+          <div className='col'>
+            <AddressBox/>
+            <BalanceBox/>
+          </div>
         </div>
+      </div>
         
         <TransactionBox/>
       </AddressProvider>
