@@ -5,11 +5,16 @@ import { subscribe } from './pubsub';
 import { AddressEnteredEvent } from './project-events';
 import React, { useState, useEffect } from 'react';
 
+function toEther(wei){
+    return  wei / Math.pow(10, 18);
+}
+
 const Transaction = (props) => (
     <tr>
-      <td>{props.from}</td>
-      <td>{props.to}</td>
-      <td>{props.value}</td>
+        <td>{props.hash}</td>
+        <td>{props.from}</td>
+        <td>{props.to}</td>
+        <td>{`${toEther(props.value)} Ether`}</td>
     </tr>
   );
 
@@ -34,7 +39,7 @@ const TransactionBox = () => {
         
         return transactions.map((transaction) => {
             return (
-                <Transaction from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
+                <Transaction hash={transaction.hash} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
             );
         });
         
@@ -72,9 +77,10 @@ const TransactionBox = () => {
     return (
         <div>
             <h3>Transactions</h3>
-            <table className="table table-hover table-striped" style={{ marginTop: 20 }}>
+            <table className="table table-dark table-striped table-hover" style={{ marginTop: 20 }}>
                 <thead>
                     <tr>
+                        <th>Transaction Hash</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Value</th>
