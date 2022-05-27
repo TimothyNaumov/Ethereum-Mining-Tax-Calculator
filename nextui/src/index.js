@@ -3,13 +3,24 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import UploadCSV from './pages/UploadCSV';
+import LinkWallet from './pages/LinkWallet';
+import MainPage from './pages/MainPage';
+import PostRequestExample from './pages/postRequestExample';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    
+    <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<MainPage/>}></Route>
+        <Route path="linkWallet" element={<LinkWallet/>}></Route>
+        <Route path='uploadCSV' element={<UploadCSV/>}/>
+        <Route path='postExample' element={<PostRequestExample/>}></Route>
+      </Routes>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

@@ -4,14 +4,20 @@ import '../App.css';
 import { subscribe } from './pubsub';
 import { AddressEnteredEvent } from './project-events';
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function toEther(wei){
     return  wei / Math.pow(10, 18);
 }
 
+function toHumanTime(epochTime){
+    return new Date( epochTime * 1000);
+}
+
 const Transaction = (props) => (
     <tr>
         <td>{props.hash}</td>
+        <td>{`${toHumanTime(props.timeStamp).toString()}`}</td>
         <td>{props.from}</td>
         <td>{props.to}</td>
         <td>{`${toEther(props.value)} Ether`}</td>
@@ -24,9 +30,15 @@ const TransactionBox = () => {
 
     useEffect(() => {
         const handle = subscribe(AddressEnteredEvent, (input) => {
-            fetch(`http://localhost:4000/transactions?address=${input.inputAddress}`)
-            .then(response => response.json())
-            .then(data => setTransactions(data))
+            //fetch(`http://localhost:4000/transactions?address=${input.inputAddress}`)
+            //.then(response => response.json())
+            //.then(data => setTransactions(data))
+
+            axios.get(`http://localhost:4000/transactions?address=${input.inputAddress}`)
+            .then(res => {
+                const walletTransactions = res.data;
+                setTransactions(walletTransactions);
+            })
         });
 
         return function cleanup(){
@@ -39,7 +51,7 @@ const TransactionBox = () => {
         
         return transactions.map((transaction) => {
             return (
-                <Transaction hash={transaction.hash} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
+                <Transaction hash={transaction.hash} timeStamp={transaction.timeStamp} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
             );
         });
         
@@ -75,12 +87,13 @@ const TransactionBox = () => {
     */
 
     return (
-        <div>
-            <h3>Transactions</h3>
-            <table className="table table-dark table-striped table-hover" style={{ marginTop: 20 }}>
+        <div className="table-wrapper-scoll-y my-custom-scrollbar">
+            <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
+                <caption><h1>All Transactions:</h1></caption>
                 <thead>
                     <tr>
                         <th>Transaction Hash</th>
+                        <th>Date and Time</th>
                         <th>From</th>
                         <th>To</th>
                         <th>Value</th>

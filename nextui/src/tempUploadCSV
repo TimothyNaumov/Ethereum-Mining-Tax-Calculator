@@ -1,0 +1,168 @@
+import React, { useState } from 'react';
+import axios from 'axios';
+import FormData from 'form-data';
+
+const UploadCSV = () => {
+    const [file, setFile] = useState();
+    const [array, setArray] = useState([]);
+
+    const csvFileToArray = string => {
+        const csvHeader = string.slice(0, string.indexOf("\n")).split(",");
+        const csvRows = string.slice(string.indexOf("\n") + 1).split("\n");
+        console.log(csvRows);
+
+        const array = csvRows.map(i => {
+            const values = i.split(",");
+            console.log("transaction type is " + values[1]);
+            /*
+            if(values[1] === "Sell"){
+                console.log(`Transaction has type ${values[1]} with amount sold as ${values[8]} on ${values[2]}`);
+                const newObject = new Object();
+                newObject.amountSold = values[8]
+                newObject.sellDate = values[2]
+                return newObject;
+            }
+            */
+            
+            
+            const obj = csvHeader.reduce((object, header, index) => {
+                object[header] = values[index];
+                return object;
+            }, {});
+            
+            //console.log("obj transaction type is " + obj.toString());
+            return obj;
+        });
+
+        setArray(array);
+    };
+
+    const arrayToJson = () => {
+        console.log("trying to convert array to json");
+        array.forEach(element => {
+            console.log("transaction type of " + element[1]);
+        });
+    }
+    
+    const fileReader = new FileReader();
+
+    const handleChange = (e) => {
+        setFile(e.target.files[0]);
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        /*
+        const formData = new FormData();
+        formData.append("transactions", file);
+        try{
+            const response = axios({
+                method: "post",
+                url: 'http://localhost:6000/upload-csv',
+                data: formData,
+                headers: {"Content-type": "multipart/form-data"},
+            });
+        } catch(error){
+            console.log(error)
+        }
+        */
+
+        if(file){
+            fileReader.onload = function (event){
+                const csvOutput = event.target.result;
+                //csvFileToArray(csvOutput);
+                //console.log(csvOutput);
+                //arrayToJson(csvOutput);
+            };
+            fileReader.readAsText(file);
+            sendCSVToServer(file);
+        }
+    }
+
+    const sendCSVToServer = () => {
+
+        var myHeaders = new Headers();
+        myHeaders.append("Content-type", "application/x-www-form-urlencoded");
+
+        var urlencoded = new URLSearchParams();
+        urlencoded.append("id", "4");
+        urlencoded.append("token", "sdfa3");
+        urlencoded.append("geo", "us");
+
+        var requestOptions = {
+            method: 'POST',
+            headers: myHeaders,
+            body: urlencoded,
+            redirect: 'follow'
+        };
+
+        fetch("http://localhost:6000/api/users", requestOptions)
+        .then(response => response.text())
+        .then(result => console.log(result))
+        .catch(error => console.log('error', error));
+
+        //let data = new FormData();
+        //data.append('transactions', file);
+        /*
+        const formData = new FormData();
+        formData.append("transactions", file);
+        try{
+            axios({
+                method: "post",
+                url: 'http://localhost:6000/upload-csv',
+                data: formData,
+                headers: {"Content-type": "multipart/form-data"},
+            });
+        } catch(error){
+            console.log(error)
+        }
+        /*
+        var config = {
+            method: 'post',
+            url: 'http://localhost:6000/upload-csv',
+            data : file
+          };
+        axios(config)
+        .then(function (response) {
+            console.log(JSON.stringify(response.data));
+        })
+          .catch(function (error) {
+            console.log(error);
+        });
+        */
+    }
+
+    const headerKeys = Object.keys(Object.assign({}, ...array));
+
+    return (
+        <div className="mb-3">
+            <label htmlFor="formFile" className="form-label">Upload CSV of selling transactions from Coinbase</label>
+            <input className="form-control" type="file" id="csvFileInput" accept={".csv"} onChange={handleChange}></input>
+            <button type="button" className="btn btn-primary" onClick={(e) => {handleSubmit(e);}}>Upload</button>
+
+            <br/>
+            <table>
+                <thead>
+                    <tr key={"header"}>
+                        {headerKeys.map((key) => (
+                        <th>{key}</th>
+                        ))}
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {array.map((item) => (
+                        <tr key={item.id}>
+                        {Object.values(item).map((val) => (
+                            <td>{val}</td>
+                        ))}
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
+    );
+  };
+  
+  export default UploadCSV;
+  

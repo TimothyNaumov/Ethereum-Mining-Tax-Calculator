@@ -1,6 +1,7 @@
 import React, { Component, useContext, useEffect, useState } from 'react';
 import { Card } from '@nextui-org/react';
 import '../App.css';
+import axios from 'axios';
 
 import { subscribe } from './pubsub';
 import { useFilter } from '@nextui-org/react/node_modules/@react-aria/i18n';
@@ -11,9 +12,14 @@ const BalanceBox = () => {
 
     useEffect(() => {
         const handle = subscribe(AddressEnteredEvent, (input) => {
-            fetch(`http://localhost:4000/accountbalance?address=${input.inputAddress}`)
-            .then(response => response.json())
-            .then(data => setBalance(data))
+            //fetch(`http://localhost:4000/accountbalance?address=${input.inputAddress}`)
+            //.then(response => response.json())
+            //.then(data => setBalance(data))
+            axios.get(`http://localhost:4000/accountbalance?address=${input.inputAddress}`)
+            .then(res => {
+                const walletBalance = res.data;
+                setBalance(walletBalance);
+            })
         });
         return function cleanup(){
             handle.unsubscribe()
