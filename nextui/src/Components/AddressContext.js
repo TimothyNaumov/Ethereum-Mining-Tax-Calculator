@@ -12,7 +12,7 @@ export function useAddressUpdate(){
 }
 
 export function AddressProvider({children}){
-    const [address, setAddress] = useState("")
+    const [address, setAddress] = useState("blank address")
 
     function updateAddress(newAddress){
         console.log("Setting address to: " + newAddress);

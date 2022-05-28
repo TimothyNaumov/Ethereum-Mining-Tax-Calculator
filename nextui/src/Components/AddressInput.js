@@ -13,14 +13,17 @@ import {publish} from './pubsub';
 function AddressInput(){
   const [address, setAddress] = useState("");
   const updateAddress = useAddressUpdate();
+  const currentAddress = useAddress();
 
   function handleChange(event){
     event.preventDefault();
     setAddress(event.target.value);
+
   }
 
   async function onSubmit(e){
     e.preventDefault();
+    console.log("When the submit button was clicked the address context was " + currentAddress);
     updateAddress(address);
     publish(new AddressEnteredEvent({inputAddress: address}));
   }

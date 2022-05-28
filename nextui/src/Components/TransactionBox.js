@@ -3,8 +3,9 @@ import '../App.css';
 
 import { subscribe } from './pubsub';
 import { AddressEnteredEvent } from './project-events';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
+import { TransactionsContext } from "../TransactionsContext";
 
 function toEther(wei){
     return  wei / Math.pow(10, 18);
@@ -26,9 +27,12 @@ const Transaction = (props) => (
 
 
 const TransactionBox = () => {
-    const [transactions, setTransactions] = useState([]);
+    const [walletTransactions, setWalletTransactions] = useState([]);
+    const {transactions, setTransactions} = useContext(TransactionsContext);
+
 
     useEffect(() => {
+        
         const handle = subscribe(AddressEnteredEvent, (input) => {
             //fetch(`http://localhost:4000/transactions?address=${input.inputAddress}`)
             //.then(response => response.json())
@@ -36,8 +40,11 @@ const TransactionBox = () => {
 
             axios.get(`http://localhost:4000/transactions?address=${input.inputAddress}`)
             .then(res => {
-                const walletTransactions = res.data;
-                setTransactions(walletTransactions);
+                const importedWalletTransactions = res.data;
+                setWalletTransactions(importedWalletTransactions);
+                let currentGlobalState = transactions;
+                currentGlobalState.walletTransactions = importedWalletTransactions;
+                setTransactions(currentGlobalState);
             })
         });
 
@@ -47,9 +54,9 @@ const TransactionBox = () => {
     });
 
     function transactionList(){
-        console.log(`Transactions is ${transactions}`);
+        console.log(`Transactions is ${walletTransactions}`);
         
-        return transactions.map((transaction) => {
+        return walletTransactions.map((transaction) => {
             return (
                 <Transaction hash={transaction.hash} timeStamp={transaction.timeStamp} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
             );
