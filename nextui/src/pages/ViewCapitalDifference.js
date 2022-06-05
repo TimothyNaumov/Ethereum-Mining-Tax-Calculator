@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from "react";
 import { TransactionsContext } from "../TransactionsContext";
-import moment from 'moment';
+import generateGainLossTransactions from '../TaxGenerator';
+import NavigationBar from '../Components/NavigationBar';
 function ViewCapitalDifference() {
     const {transactions} = useContext(TransactionsContext);
     let wallet = transactions.walletTransactions;
     let exchange = transactions.exchangeTransactions;
     const [miningTransactions, setMiningTransactions] = useState([]);
     const [exchangeTransactions, setExchangeTransactions] = useState([]);
-    const newmoment = Math.ceil(1610654014 / 86400) * 86400
-    console.log(newmoment);
+    const [report, setReport] = useState([]);
 
     function epochToEndOfDay(epoch){
         return Math.ceil(epoch / 86400) * 86400
@@ -19,33 +19,54 @@ function ViewCapitalDifference() {
     }
 
     useEffect(() => {
+        
+        const walletTransactions = transactions.walletTransactions;
+        console.log(walletTransactions);
+        let startRange = epochToEndOfDay(walletTransactions[0].timeStamp);
+        let endRange = epochToEndOfDay(walletTransactions[walletTransactions.length - 1].timeStamp);
+        console.log(`start: ${startRange} end: ${endRange}`);
         var requestOptions = {
             method: 'GET',
             redirect: 'follow'
         };
-
-        fetch("https://api.coingecko.com/api/v3/coins/ethereum/market_chart/range?vs_currency=usd&from=1610654014&to=1644395655", requestOptions)
+        fetch(`https://api.coingecko.com/api/v3/coins/ethereum/market_chart/range?vs_currency=usd&from=${startRange}&to=${endRange}`, requestOptions)
         .then(response => response.json())
         .then(result => {
             let pricesAsArray = result.prices;
+            console.log(pricesAsArray);
             let associativeArray = {};
             pricesAsArray.forEach(element => {
                 let epoch = element[0];
                 let priceAtEpoch = element[1]
                 associativeArray[epoch] = priceAtEpoch; 
-                
             });
             console.log(associativeArray);
-            
-
-            const walletTransactions = transactions.walletTransactions;
             // * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
-            const incomeTransactionsFromWallet = walletTransactions.filter(element => element.to === "0x750ca59270bdf16507ff977037a49a8cfb6f98b9" && element.value != 0).map(element => ({epoch: element.timeStamp, value: toEther(element.value) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]}));
+            const incomeTransactionsFromWallet = walletTransactions.filter(element => element.to === "0x750ca59270bdf16507ff977037a49a8cfb6f98b9" && element.value != 0).map(element => (
+                {
+                    epoch: element.timeStamp,
+                    isoDate: new Date(element.timeStamp * 1000),
+                    incomeInUSD: toEther(element.value) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)],
+                    ether: toEther(element.value),
+                    etherPriceOnIncomeDate: associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
+                }
+            ));
             setMiningTransactions(incomeTransactionsFromWallet);
 
             const exchangeTransactions = transactions.exchangeTransactions;
-            const sellingTransactionsFromExchange = exchangeTransactions.filter(element => element["Transaction Type"] === "Sell").map(element => ({Date: element["Date & time"], Proceeds: element["Proceeds (excl. fees paid) (USD)"]}));
+            const sellingTransactionsFromExchange = exchangeTransactions.filter(element => element["Transaction Type"] === "Sell").map(element => (
+                {
+                    Date: element["Date & time"],
+                    Epoch: new Date(element["Date & time"]).getTime(),
+                    EpochAtEndOfDay: epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000),
+                    Proceeds: element["Proceeds (excl. fees paid) (USD)"],
+                    QuantityDisposed: element["Quantity Disposed"],
+                    EtherPriceOnSellDate: associativeArray[epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000) * 1000]
+                }
+            ));
+            //associativeArray[(epochToEndOfDay(new Date(element["Date & time"]).getTime()) * 1000)]
             setExchangeTransactions(sellingTransactionsFromExchange);
+            setReport(generateGainLossTransactions(incomeTransactionsFromWallet, sellingTransactionsFromExchange));
         })
         .catch(error => console.log('error', error));
 
@@ -54,8 +75,19 @@ function ViewCapitalDifference() {
 
     return (
         <div>
-            <pre>{JSON.stringify(miningTransactions, null, 2)}</pre>
-            <p>{JSON.stringify(exchangeTransactions, null, 2)}</p>
+            <NavigationBar/>
+            <div className="row">
+                <div className="col">
+                    <pre>{JSON.stringify(miningTransactions, null, 2)}</pre>
+                </div>
+                <div className="col">
+                    <pre>{JSON.stringify(exchangeTransactions, null, 2)}</pre>  
+                </div>
+                <div className="col">
+                <pre>{JSON.stringify(report, null, 2)}</pre>
+                </div>
+                
+            </div>
         </div>
     );
 }

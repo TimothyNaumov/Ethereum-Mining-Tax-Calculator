@@ -11,12 +11,13 @@ import GlobalStyles from '../Components/styles/Global';
 import TransactionBox from '../Components/TransactionBox';
 import ToUploadButton from '../Components/ToUploadButton';
 import { TransactionsProvider } from '../TransactionsContext';
+import NavigationBar from '../Components/NavigationBar';
 
 const LinkWallet = () => {
   return (
     <div>
       <GlobalStyles/>
-      <Header/>
+      <NavigationBar/>
         <AddressProvider>
           <div className='container-fluid'>
             <div className='row'>

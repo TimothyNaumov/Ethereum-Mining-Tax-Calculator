@@ -90,7 +90,7 @@ function UploadCSV() {
                     </div>
                     
                 </div>
-                    <Link to="/viewCapitalDifference" className="btn btn-primary">View your Capital Gain/Loss report</Link>
+                <Link to="/viewCapitalDifference" className="btn btn-primary">View your Capital Gain/Loss report</Link>
             </div>
             {/* Table */}
             <div>
