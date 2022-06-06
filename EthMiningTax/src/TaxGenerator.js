@@ -16,7 +16,7 @@ const generateGainLossTransactions = function(costBasis, sellingTransactions){
         let iterations = 0
         while(remainingEthSold > 0 && iterations < 10){
             let costBasisTransaction = costBasisTransactions[basisIndex];
-            let acqDate = new Date(costBasisTransaction.epoch * 1000);
+            let acqDate = new Date(costBasisTransaction.epoch * 1000).toString();
             let currentReportTransaction = {
                 AcquireDate: acqDate,
                 SellDate: sellTransaction.Date

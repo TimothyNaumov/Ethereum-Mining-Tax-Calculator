@@ -1,5 +1,3 @@
-import { StyledHeader } from "./styles/Header.styled"
-
 export default function Header(){
     return (
         <div className="App-header">
@@ -7,9 +5,3 @@ export default function Header(){
         </div>
     )
 }
-
-/*
-    <StyledHeader>
-            <h1>Ethereum Wallet Lookup</h1>
-        </StyledHeader>
-*/

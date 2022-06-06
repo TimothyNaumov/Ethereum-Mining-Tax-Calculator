@@ -203,141 +203,171 @@ const exchangeTransactions = [
 ];
 
 const expectedResults = [
-    {
-      "AcquireDate": "2021-01-14T19:53:34.000Z",
-      "SellDate": "2021-02-08T22:03:15Z",
-      "CostBasis": "7.16",
-      "Proceeds": "9.00",
-      "CapitalGainLoss": "1.84"
-    },
-    {
-      "AcquireDate": "2021-01-14T19:53:34.000Z",
-      "SellDate": "2021-07-02T17:37:33Z",
-      "CostBasis": "8.59",
-      "Proceeds": "14.46",
-      "CapitalGainLoss": "5.87"
-    },
-    {
-      "AcquireDate": "2021-01-21T19:59:42.000Z",
-      "SellDate": "2021-07-02T17:37:33Z",
-      "CostBasis": "13.31",
-      "Proceeds": "24.28",
-      "CapitalGainLoss": "10.96"
-    },
-    {
-      "AcquireDate": "2021-01-30T13:37:29.000Z",
-      "SellDate": "2021-07-02T17:37:33Z",
-      "CostBasis": "13.73",
-      "Proceeds": "20.49",
-      "CapitalGainLoss": "6.76"
-    },
-    {
-      "AcquireDate": "2021-02-06T13:41:34.000Z",
-      "SellDate": "2021-07-02T17:37:33Z",
-      "CostBasis": "25.71",
-      "Proceeds": "31.26",
-      "CapitalGainLoss": "5.55"
-    },
-    {
-      "AcquireDate": "2021-02-20T13:43:57.000Z",
-      "SellDate": "2021-07-02T17:37:33Z",
-      "CostBasis": "25.00",
-      "Proceeds": "26.53",
-      "CapitalGainLoss": "1.53"
-    },
-    {
-      "AcquireDate": "2021-02-20T13:43:57.000Z",
-      "SellDate": "2021-07-23T23:13:30Z",
-      "CostBasis": "29.69",
-      "Proceeds": "31.12",
-      "CapitalGainLoss": "1.43"
-    },
-    {
-      "AcquireDate": "2021-03-06T13:47:06.000Z",
-      "SellDate": "2021-07-23T23:13:30Z",
-      "CostBasis": "54.15",
-      "Proceeds": "65.89",
-      "CapitalGainLoss": "11.74"
-    },
-    {
-      "AcquireDate": "2021-03-06T13:47:06.000Z",
-      "SellDate": "2021-07-27T19:31:19Z",
-      "CostBasis": "1.46",
-      "Proceeds": "1.92",
-      "CapitalGainLoss": "0.47"
-    },
-    {
-      "AcquireDate": "2021-04-01T14:20:13.000Z",
-      "SellDate": "2021-07-27T19:31:19Z",
-      "CostBasis": "19.76",
-      "Proceeds": "21.99",
-      "CapitalGainLoss": "2.23"
-    },
-    {
-      "AcquireDate": "2021-04-09T08:59:13.000Z",
-      "SellDate": "2021-07-27T19:31:19Z",
-      "CostBasis": "209.92",
-      "Proceeds": "222.37",
-      "CapitalGainLoss": "12.45"
-    },
-    {
-      "AcquireDate": "2021-04-09T08:59:13.000Z",
-      "SellDate": "2021-08-06T22:05:47Z",
-      "CostBasis": "4.24",
-      "Proceeds": "5.72",
-      "CapitalGainLoss": "1.48"
-    },
-    {
-      "AcquireDate": "2021-04-17T03:44:59.000Z",
-      "SellDate": "2021-08-06T22:05:47Z",
-      "CostBasis": "76.73",
-      "Proceeds": "91.29",
-      "CapitalGainLoss": "14.56"
-    },
-    {
-      "AcquireDate": "2021-04-17T03:44:59.000Z",
-      "SellDate": "2021-08-14T20:14:04Z",
-      "CostBasis": "4.57",
-      "Proceeds": "6.13",
-      "CapitalGainLoss": "1.57"
-    },
-    {
-      "AcquireDate": "2021-04-28T07:01:08.000Z",
-      "SellDate": "2021-08-14T20:14:04Z",
-      "CostBasis": "101.08",
-      "Proceeds": "115.88",
-      "CapitalGainLoss": "14.80"
-    },
-    {
-      "AcquireDate": "2021-04-28T07:01:08.000Z",
-      "SellDate": "2021-08-17T14:08:19Z",
-      "CostBasis": "36.38",
-      "Proceeds": "41.91",
-      "CapitalGainLoss": "5.52"
-    },
-    {
-      "AcquireDate": "2021-05-13T19:15:27.000Z",
-      "SellDate": "2021-08-17T14:08:19Z",
-      "CostBasis": "187.59",
-      "Proceeds": "158.36",
-      "CapitalGainLoss": "-29.23"
-    },
-    {
-      "AcquireDate": "2021-05-22T14:03:47.000Z",
-      "SellDate": "2021-08-17T14:08:19Z",
-      "CostBasis": "115.34",
-      "Proceeds": "158.32",
-      "CapitalGainLoss": "42.99"
-    },
-    {
-      "AcquireDate": "2021-05-31T14:15:07.000Z",
-      "SellDate": "2021-08-17T14:08:19Z",
-      "CostBasis": "30.33",
-      "Proceeds": "35.46",
-      "CapitalGainLoss": "5.12"
-    }
+  {
+    "AcquireDate": "Thu Jan 14 2021 13:53:34 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-02-08T22:03:15Z",
+    "CostBasis": "7.16",
+    "Proceeds": "9.00",
+    "CapitalGainLoss": "1.84"
+  },
+  {
+    "AcquireDate": "Thu Jan 14 2021 13:53:34 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-02T17:37:33Z",
+    "CostBasis": "8.59",
+    "Proceeds": "14.46",
+    "CapitalGainLoss": "5.87"
+  },
+  {
+    "AcquireDate": "Thu Jan 21 2021 13:59:42 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-02T17:37:33Z",
+    "CostBasis": "13.31",
+    "Proceeds": "24.28",
+    "CapitalGainLoss": "10.96"
+  },
+  {
+    "AcquireDate": "Sat Jan 30 2021 07:37:29 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-02T17:37:33Z",
+    "CostBasis": "13.73",
+    "Proceeds": "20.49",
+    "CapitalGainLoss": "6.76"
+  },
+  {
+    "AcquireDate": "Sat Feb 06 2021 07:41:34 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-02T17:37:33Z",
+    "CostBasis": "25.71",
+    "Proceeds": "31.26",
+    "CapitalGainLoss": "5.55"
+  },
+  {
+    "AcquireDate": "Sat Feb 20 2021 07:43:57 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-02T17:37:33Z",
+    "CostBasis": "25.00",
+    "Proceeds": "26.53",
+    "CapitalGainLoss": "1.53"
+  },
+  {
+    "AcquireDate": "Sat Feb 20 2021 07:43:57 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-23T23:13:30Z",
+    "CostBasis": "29.69",
+    "Proceeds": "31.12",
+    "CapitalGainLoss": "1.43"
+  },
+  {
+    "AcquireDate": "Sat Mar 06 2021 07:47:06 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-23T23:13:30Z",
+    "CostBasis": "54.15",
+    "Proceeds": "65.89",
+    "CapitalGainLoss": "11.74"
+  },
+  {
+    "AcquireDate": "Sat Mar 06 2021 07:47:06 GMT-0600 (Central Standard Time)",
+    "SellDate": "2021-07-27T19:31:19Z",
+    "CostBasis": "1.46",
+    "Proceeds": "1.92",
+    "CapitalGainLoss": "0.47"
+  },
+  {
+    "AcquireDate": "Thu Apr 01 2021 09:20:13 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-07-27T19:31:19Z",
+    "CostBasis": "19.76",
+    "Proceeds": "21.99",
+    "CapitalGainLoss": "2.23"
+  },
+  {
+    "AcquireDate": "Fri Apr 09 2021 03:59:13 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-07-27T19:31:19Z",
+    "CostBasis": "209.92",
+    "Proceeds": "222.37",
+    "CapitalGainLoss": "12.45"
+  },
+  {
+    "AcquireDate": "Fri Apr 09 2021 03:59:13 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-06T22:05:47Z",
+    "CostBasis": "4.24",
+    "Proceeds": "5.72",
+    "CapitalGainLoss": "1.48"
+  },
+  {
+    "AcquireDate": "Fri Apr 16 2021 22:44:59 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-06T22:05:47Z",
+    "CostBasis": "76.73",
+    "Proceeds": "91.29",
+    "CapitalGainLoss": "14.56"
+  },
+  {
+    "AcquireDate": "Fri Apr 16 2021 22:44:59 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-14T20:14:04Z",
+    "CostBasis": "4.57",
+    "Proceeds": "6.13",
+    "CapitalGainLoss": "1.57"
+  },
+  {
+    "AcquireDate": "Wed Apr 28 2021 02:01:08 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-14T20:14:04Z",
+    "CostBasis": "101.08",
+    "Proceeds": "115.88",
+    "CapitalGainLoss": "14.80"
+  },
+  {
+    "AcquireDate": "Wed Apr 28 2021 02:01:08 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-17T14:08:19Z",
+    "CostBasis": "36.38",
+    "Proceeds": "41.91",
+    "CapitalGainLoss": "5.52"
+  },
+  {
+    "AcquireDate": "Thu May 13 2021 14:15:27 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-17T14:08:19Z",
+    "CostBasis": "187.59",
+    "Proceeds": "158.36",
+    "CapitalGainLoss": "-29.23"
+  },
+  {
+    "AcquireDate": "Sat May 22 2021 09:03:47 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-17T14:08:19Z",
+    "CostBasis": "115.34",
+    "Proceeds": "158.32",
+    "CapitalGainLoss": "42.99"
+  },
+  {
+    "AcquireDate": "Mon May 31 2021 09:15:07 GMT-0500 (Central Daylight Time)",
+    "SellDate": "2021-08-17T14:08:19Z",
+    "CostBasis": "30.33",
+    "Proceeds": "35.46",
+    "CapitalGainLoss": "5.12"
+  }
 ]
 
-test('Fifo transactions should come to', () => {
-    expect(generateGainLossTransactions(incomeTransactions, exchangeTransactions)).toEqual(expectedResults);
+const singleIncome = [{
+  "epoch": "1610654014",
+  "isoDate": "2021-01-14T19:53:34.000Z",
+  "incomeInUSD": 8.593199983905699,
+  "ether": 0.007061464011589465,
+  "etherPriceOnIncomeDate": 1216.9147884634556
+}];
+
+const singleSell = [{
+  "Date": "2021-02-08T22:03:15Z",
+  "Epoch": 1612821795000,
+  "EpochAtEndOfDay": 1612828800,
+  "Proceeds": "8.999999999999999999920768",
+  "QuantityDisposed": "0.00588416",
+  "EtherPriceOnSellDate": 1750.997553719215
+}];
+
+const expectedSoloResult = [{
+  "AcquireDate": "Thu Jan 14 2021 13:53:34 GMT-0600 (Central Standard Time)",
+  "SellDate": "2021-02-08T22:03:15Z",
+  "CostBasis": "7.16",
+  "Proceeds": "9.00",
+  "CapitalGainLoss": "1.84"
+}];
+
+
+test('Single Transaction Test', () => {
+    expect(generateGainLossTransactions(singleIncome, singleSell)).toEqual(expectedSoloResult);
+});
+
+test('All Transactions test', () => {
+  expect(generateGainLossTransactions(incomeTransactions, exchangeTransactions)).toEqual(expectedResults);
 });

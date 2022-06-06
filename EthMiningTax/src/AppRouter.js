@@ -1,14 +1,13 @@
 import React, {useState} from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import UploadCSV from './pages/UploadCSV';
 import LinkWallet from './pages/LinkWallet';
 import MainPage from './pages/MainPage';
-import GlobalContext from './pages/GlobalContext';
 import ViewCapitalDifference from './pages/ViewCapitalDifference';
 import { TransactionsContext } from './TransactionsContext';
 
 function AppRouter(){
-    const [transactions, setTransactions] = useState({walletTransactions: null, exchangeTransactions: null});
+    const [transactions, setTransactions] = useState({address: null, walletTransactions: null, exchangeTransactions: null});
 
     return (
         <BrowserRouter>
@@ -18,7 +17,6 @@ function AppRouter(){
                     <Route path="linkWallet" element={<LinkWallet/>}></Route>
                     <Route path='uploadCSV' element={<UploadCSV/>}/>
                     <Route path='viewCapitalDifference' element={<ViewCapitalDifference/>}/>
-                    <Route path='globalContext' element={<GlobalContext/>}/>
                 </Routes>
             </TransactionsContext.Provider>
         </BrowserRouter>

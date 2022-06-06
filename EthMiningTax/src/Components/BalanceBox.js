@@ -1,10 +1,8 @@
-import React, { Component, useContext, useEffect, useState } from 'react';
-import { Card } from '@nextui-org/react';
+import React, { useEffect, useState } from 'react';
 import '../App.css';
 import axios from 'axios';
 
 import { subscribe } from './pubsub';
-import { useFilter } from '@nextui-org/react/node_modules/@react-aria/i18n';
 import { AddressEnteredEvent } from './project-events';
 
 const BalanceBox = () => {
@@ -38,8 +36,3 @@ const BalanceBox = () => {
 };
 
 export default BalanceBox;
-/*
-<Card bordered shadow={false} hoverable css={{ mw: "400px" }}>
-                <p>Balance: {balance} eth</p>
-            </Card>
-            */
