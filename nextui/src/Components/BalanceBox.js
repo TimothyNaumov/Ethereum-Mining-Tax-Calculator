@@ -15,7 +15,7 @@ const BalanceBox = () => {
             //fetch(`http://localhost:4000/accountbalance?address=${input.inputAddress}`)
             //.then(response => response.json())
             //.then(data => setBalance(data))
-            axios.get(`http://localhost:4000/accountbalance?address=${input.inputAddress}`)
+            axios.get(`http://localhost:4000/wallet/balance/${input.inputAddress}`)
             .then(res => {
                 const walletBalance = res.data;
                 setBalance(walletBalance);

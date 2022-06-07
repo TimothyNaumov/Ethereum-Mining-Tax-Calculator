@@ -38,7 +38,7 @@ const TransactionBox = () => {
             //.then(response => response.json())
             //.then(data => setTransactions(data))
 
-            axios.get(`http://localhost:4000/transactions?address=${input.inputAddress}`)
+            axios.get(`http://localhost:4000/wallet/transactions/${input.inputAddress}`)
             .then(res => {
                 const importedWalletTransactions = res.data;
                 setWalletTransactions(importedWalletTransactions);
