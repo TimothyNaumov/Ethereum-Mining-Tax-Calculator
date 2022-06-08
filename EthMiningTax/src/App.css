@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
 .App {
   text-align: center;
 }
@@ -64,4 +66,44 @@
 
 bg-myRed{
   background-color: crimson;
+}
+
+/********************** Main Page Jumbo **********************/
+.jumbo-wrapper{
+  position: relative;
+  background: url(assets/gradient.jpg) no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 90vh;
+}
+
+.jumbo-info{
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  
+}
+
+.jumbo-info h1{
+  font-family: 'Roboto', sans-serif;
+  color:#d1d1d1;
+  text-transform: capitalize;
+}
+
+/********************** Typed Text **********************/
+.typed-text{
+  font-size: 2rem;
+  color: #b9b9b9;
+}
+
+/********************** Main Page Button **********************/
+.main-page-button{
+  border: 1px solid #5779bd;
 }

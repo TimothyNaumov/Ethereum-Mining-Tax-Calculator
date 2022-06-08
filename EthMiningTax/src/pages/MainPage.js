@@ -1,10 +1,20 @@
 import NextButton from "../Components/NextButton";
 import NavigationBar from "../Components/NavigationBar";
-const MainPage = () => {
+import Jumbo from "../Components/Jumbo";
+import React from "react";
+function MainPage(){
     return ( 
-      <div>
+      <>
+
         <NavigationBar/>
-        <div className='p-5 text-center bg-image' style={{ backgroundColor: "#45728c", height:"100%", width: "100%"}}>
+        <Jumbo/>
+      </>
+     );
+}
+ 
+export default MainPage;
+
+/*<div className='p-5 text-center bg-image' style={{ backgroundColor: "#45728c", height:"100%", width: "100%"}}>
           <div>
             <div className='d-flex justify-content-center align-items-center'>
               <div className='text-white'>
@@ -13,9 +23,5 @@ const MainPage = () => {
               </div>
             </div>
           </div>
-        </div>
-      </div>
-     );
-}
- 
-export default MainPage;
+        </div> 
+        */
