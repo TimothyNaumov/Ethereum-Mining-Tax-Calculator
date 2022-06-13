@@ -376,11 +376,67 @@ const expectedSoloResult = [{
 
 const testcaseincome1 = [
   {
-    "epoch": "1612618894",
-    "isoDate": "2021-02-06T13:41:34.000Z",
-    "incomeInUSD": 25.707178350471413,
-    "ether": 0.01526607749513815,
-    "etherPriceOnIncomeDate": 1683.941297865053
+    "epoch": "1612652469",
+    "isoDate": "2021-02-06T23:01:09Z",
+    "incomeInUSD": 10.08,
+    "ether": 0.0059,
+    "etherPriceOnIncomeDate": 1677.85
+  },
+  {
+    "epoch": "1622319361",
+    "isoDate": "2021-05-29T20:16:01Z",
+    "incomeInUSD": 340.00,
+    "ether": 0.15,
+    "etherPriceOnIncomeDate": 2294.626285512794
+  },
+  {
+    "epoch": "1624106889",
+    "isoDate": "2021-06-19T12:48:09Z",
+    "incomeInUSD": 22.55,
+    "ether": 0.01,
+    "etherPriceOnIncomeDate": 2176.308536317709
+  },
+  {
+    "epoch": "1624107043",
+    "isoDate": "2021-06-19T12:50:43Z",
+    "incomeInUSD": 450.61,
+    "ether": 0.2,
+    "etherPriceOnIncomeDate": 2176.308536317709
+  },
+  {
+    "epoch": "1624107121",
+    "isoDate": "2021-06-19T12:52:01Z",
+    "incomeInUSD": 161.24,
+    "ether": 0.0715429,
+    "etherPriceOnIncomeDate": 2176.308536317709
+  },
+  {
+    "epoch": "1624983230",
+    "isoDate": "2021-06-29T16:13:50Z",
+    "incomeInUSD": 219.34,
+    "ether": 0.09924501,
+    "etherPriceOnIncomeDate": 2169.400067865984
+  },
+  {
+    "epoch": "1626195303",
+    "isoDate": "2021-07-13T16:55:03Z",
+    "incomeInUSD": 100.99,
+    "ether": 0.05077169,
+    "etherPriceOnIncomeDate": 1944.3950166372085
+  },
+  {
+    "epoch": "1627344699",
+    "isoDate": "2021-07-27T00:11:39Z",
+    "incomeInUSD": 119.89,
+    "ether": 0.05382635,
+    "etherPriceOnIncomeDate": 2292.579636803809
+  },
+  {
+    "epoch": "1628878683",
+    "isoDate": "2021-08-13T18:18:03Z",
+    "incomeInUSD": 162.72,
+    "ether": 0.05040702,
+    "etherPriceOnIncomeDate": 3323.19799054098
   }
 ]
 

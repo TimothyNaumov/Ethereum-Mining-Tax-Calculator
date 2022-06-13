@@ -20,19 +20,25 @@ const generateGainLossTransactions = function(costBasis, sellingTransactions){
             let currentEthereumSold = remainingEthSold;
             let shouldMoveToNextCostBasis = false;
             let proceeds = (remainingEthSold / sellTransaction.QuantityDisposed) * sellTransaction.Proceeds;
+            let adjustment = (remainingEthSold / costBasisTransaction.ether) * costBasisTransaction.TransactionFeePrice;
             if(costBasisTransaction.ether < remainingEthSold){
                 //Lack of quantity in income transaction requires overflow
                 remainingEthSold -= costBasisTransaction.ether;
                 currentEthereumSold = costBasisTransaction.ether;
                 currentReportTransaction.QuantityDepletedFromCostBasis = currentEthereumSold;
                 proceeds = (costBasisTransaction.ether / sellTransaction.QuantityDisposed) * sellTransaction.Proceeds;
+                adjustment = costBasisTransaction.TransactionFeePrice;
+                costBasisTransaction.TransactionFeePrice = 0;
                 shouldMoveToNextCostBasis = true;
             } else {
                 //cost basis transaction has enough quantity to cover sell transaction
                 costBasisTransaction.ether -= remainingEthSold;
+                costBasisTransaction.TransactionFeePrice -= adjustment;
+                //calculating a proportion of amount sold vs amount in cost basis to determine how much of the cost basis transactions fee can be used as an adjustment
+                //transactionFee = (remainingEthSold / costBasisTransaction.ether) * costBasisTransaction.TransactionFeePrice;
                 currentReportTransaction.QuantityLeftInBasis = costBasisTransaction.ether;
                 costBasisTransaction.incomeInUSD -= remainingEthSold * costBasisTransaction.etherPriceOnIncomeDate;
-                remainingEthSold = 0;
+                remainingEthSold = 0;  
             }
 
             let costBasisValue = costBasisTransaction.etherPriceOnIncomeDate * currentEthereumSold;
@@ -42,6 +48,8 @@ const generateGainLossTransactions = function(costBasis, sellingTransactions){
 
             let capitalGainLoss = proceeds - costBasisValue;
             currentReportTransaction.CapitalGainLoss = capitalGainLoss.toFixed(2);
+
+            currentReportTransaction.Adjustment = adjustment;
 
             console.log(`Iterations: ${iterations} \n costBasis was ${costBasisValue} with current ethereum split of ${currentEthereumSold}. There is ${remainingEthSold} ethereum remaining to parse`)
 

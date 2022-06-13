@@ -23,7 +23,7 @@ const Transaction = (props) => (
         <td>{props.to}</td>
         <td>{`${toEther(props.value)} Ether`}</td>
     </tr>
-  );
+);
 
 
 const TransactionBox = () => {

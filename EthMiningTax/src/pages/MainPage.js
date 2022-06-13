@@ -5,7 +5,10 @@ import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import React from "react";
+import {Link} from 'react-router-dom';
+
 function MainPage(){
+
     return ( 
       <>
         <NavigationBar/>
@@ -13,9 +16,8 @@ function MainPage(){
           <div className="p-5 my-4 bg-light rounded-3">
             <h1>Ethereum Mining Tools</h1>
             <p className="lead">Generate your 8949 for your Sales and Other Dispositions of Capital Assets using your Ethereum mining wallet and a list of transactions from your exchange</p>
-            <NextButton destination="/linkwallet" text="Click to get started"/>
+            <Link to='/linkwallet' className="btn btn-primary">Click to get started</Link>
           </div>
-
           <div className="row">
             <div className="col-md-4">
               <div className="card">
