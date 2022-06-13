@@ -13,7 +13,7 @@ function MainPage(){
       <>
         <NavigationBar/>
         <div className="container-fluid">
-          <div className="p-5 my-4 bg-light rounded-3">
+          <div className="p-5 my-4 rounded-3 bg-light">
             <h1>Ethereum Mining Tools</h1>
             <p className="lead">Generate your 8949 for your Sales and Other Dispositions of Capital Assets using your Ethereum mining wallet and a list of transactions from your exchange</p>
             <Link to='/linkwallet' className="btn btn-primary">Click to get started</Link>
@@ -48,18 +48,26 @@ function MainPage(){
             </div>
           </div>
 
-          <div className="accordion" id="myAccordion">
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne">
-                  <button type="button" className="accordion-button collapsed" data-bs-toggle="collapse" data-bs-target="#collapseOne"><h2>What is FIFO?</h2></button>
-                </h2>
-                <div id="collapseOne" className="accordion-collapse collapse" data-bs-parent="#myAccordion">
-                  <div className="card-body">
-                    <p>FIFO stands for First in First out and represents a capital gain loss calcualtion method that determines cost basis income transactions from when they were recieved. When you sell Ethereum for the first time, the cost basis transaction with FIFO is the very first income transaction you ever recieved from a mining pool.</p>
-                  </div>
-                </div>
-              </div> 
-            </div>
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header><h2>FIFO</h2></Accordion.Header>
+              <Accordion.Body>
+                <p>FIFO stands for First in First out and represents a capital gain loss calculation method that determines cost basis income transactions from when they were recieved as payment from a mining pool. When you sell Ethereum for the first time, the cost basis transaction with FIFO is the very first income transaction you ever recieved from a mining pool.</p>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header><h2>LIFO</h2></Accordion.Header>
+              <Accordion.Body>
+                <p>FIFO stands for First in First out and represents a capital gain loss calculation method that determines cost basis income transactions from when they were recieved as payment from a mining pool. When you sell Ethereum for the first time, the cost basis transaction with FIFO is the very first income transaction you ever recieved from a mining pool.</p>
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="2">
+              <Accordion.Header><h2>HIFO</h2></Accordion.Header>
+              <Accordion.Body>
+                <p>FIFO stands for First in First out and represents a capital gain loss calculation method that determines cost basis income transactions from when they were recieved as payment from a mining pool. When you sell Ethereum for the first time, the cost basis transaction with FIFO is the very first income transaction you ever recieved from a mining pool.</p>
+              </Accordion.Body>
+            </Accordion.Item>
+          </Accordion>
         </div>
       </>
      );
