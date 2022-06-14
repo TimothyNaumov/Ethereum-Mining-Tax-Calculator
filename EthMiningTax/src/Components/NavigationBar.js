@@ -6,8 +6,8 @@ function NavigationBar() {
     return ( 
         <Navbar bg="dark" variant='dark' sticky='top' expand="lg" collapseOnSelect>
             <Navbar.Brand>
-                <img src={logo} width="40px" height="40px" href="/"/> {''}
-                Eth Tools
+                
+                <Nav.Link href='/'><div><img src={logo} width="40px" height="40px"/> Eth Tools</div></Nav.Link>
             </Navbar.Brand>
             <Navbar.Toggle/>
             <Navbar.Collapse>

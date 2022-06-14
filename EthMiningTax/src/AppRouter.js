@@ -6,12 +6,14 @@ import MainPage from './pages/MainPage';
 import ViewCapitalDifference from './pages/ViewCapitalDifference';
 import { TransactionsContext } from './TransactionsContext';
 import AccordionExample from './pages/AccordionExample';
+import NavigationBar from './Components/NavigationBar';
 
 function AppRouter(){
     const [transactions, setTransactions] = useState({address: null, walletTransactions: null, exchangeTransactions: null});
 
     return (
         <BrowserRouter>
+            <NavigationBar/>
             <TransactionsContext.Provider value={{transactions, setTransactions}}>
                 <Routes>
                     <Route path="/" element={<MainPage/>}></Route>

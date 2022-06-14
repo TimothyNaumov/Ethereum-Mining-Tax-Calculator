@@ -1,139 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import { TransactionsContext } from "../TransactionsContext";
 import generateGainLossTransactions from '../TaxGenerator';
-import NavigationBar from '../Components/NavigationBar';
-
-const testcaseincome1 = [
-    {
-      "epoch": "1612652469",
-      "isoDate": "2021-02-06T23:01:09Z",
-      "incomeInUSD": 10.08,
-      "ether": 0.0059,
-      "etherPriceOnIncomeDate": 1677.85
-    },
-    {
-      "epoch": "1622319361",
-      "isoDate": "2021-05-29T20:16:01Z",
-      "incomeInUSD": 340.00,
-      "ether": 0.15,
-      "etherPriceOnIncomeDate": 2294.626285512794
-    },
-    {
-      "epoch": "1624106889",
-      "isoDate": "2021-06-19T12:48:09Z",
-      "incomeInUSD": 22.55,
-      "ether": 0.01,
-      "etherPriceOnIncomeDate": 2176.308536317709
-    },
-    {
-      "epoch": "1624107043",
-      "isoDate": "2021-06-19T12:50:43Z",
-      "incomeInUSD": 450.61,
-      "ether": 0.2,
-      "etherPriceOnIncomeDate": 2176.308536317709
-    },
-    {
-      "epoch": "1624107121",
-      "isoDate": "2021-06-19T12:52:01Z",
-      "incomeInUSD": 161.24,
-      "ether": 0.0715429,
-      "etherPriceOnIncomeDate": 2176.308536317709
-    },
-    {
-      "epoch": "1624983230",
-      "isoDate": "2021-06-29T16:13:50Z",
-      "incomeInUSD": 219.34,
-      "ether": 0.09924501,
-      "etherPriceOnIncomeDate": 2169.400067865984
-    },
-    {
-      "epoch": "1626195303",
-      "isoDate": "2021-07-13T16:55:03Z",
-      "incomeInUSD": 100.99,
-      "ether": 0.05077169,
-      "etherPriceOnIncomeDate": 1944.3950166372085
-    },
-    {
-      "epoch": "1627344699",
-      "isoDate": "2021-07-27T00:11:39Z",
-      "incomeInUSD": 119.89,
-      "ether": 0.05382635,
-      "etherPriceOnIncomeDate": 2292.579636803809
-    },
-    {
-      "epoch": "1628878683",
-      "isoDate": "2021-08-13T18:18:03Z",
-      "incomeInUSD": 162.72,
-      "ether": 0.05040702,
-      "etherPriceOnIncomeDate": 3323.19799054098
-    }
-  ];
-
-const testcaseincome2 = [
-    {
-      "epoch": "1612652469",
-      "isoDate": "2021-02-06T23:01:09Z",
-      "incomeInUSD": 10.08,
-      "ether": 0.003527,
-      "etherPriceOnIncomeDate": 1677.85
-    },
-    {
-      "epoch": "1622319361",
-      "isoDate": "2021-05-29T20:16:01Z",
-      "incomeInUSD": 340.00,
-      "ether": 0.144183,
-      "etherPriceOnIncomeDate": 2294.626285512794
-    },
-    {
-      "epoch": "1624106889",
-      "isoDate": "2021-06-19T12:48:09Z",
-      "incomeInUSD": 22.55,
-      "ether": 0.009727,
-      "etherPriceOnIncomeDate": 2176.308536317709
-    },
-    {
-      "epoch": "1624107043",
-      "isoDate": "2021-06-19T12:50:43Z",
-      "incomeInUSD": 450.61,
-      "ether": 0.199727,
-      "etherPriceOnIncomeDate": 2176.308536317709
-    },
-    {
-      "epoch": "1624107121",
-      "isoDate": "2021-06-19T12:52:01Z",
-      "incomeInUSD": 161.24,
-      "ether": 0.0712909,
-      "etherPriceOnIncomeDate": 2176.308536317709
-    },
-    {
-      "epoch": "1624983230",
-      "isoDate": "2021-06-29T16:13:50Z",
-      "incomeInUSD": 219.34,
-      "ether": 0.09924501,
-      "etherPriceOnIncomeDate": 2169.400067865984
-    },
-    {
-      "epoch": "1626195303",
-      "isoDate": "2021-07-13T16:55:03Z",
-      "incomeInUSD": 100.99,
-      "ether": 0.05077169,
-      "etherPriceOnIncomeDate": 1944.3950166372085
-    },
-    {
-      "epoch": "1627344699",
-      "isoDate": "2021-07-27T00:11:39Z",
-      "incomeInUSD": 119.89,
-      "ether": 0.05382635,
-      "etherPriceOnIncomeDate": 2292.579636803809
-    },
-    {
-      "epoch": "1628878683",
-      "isoDate": "2021-08-13T18:18:03Z",
-      "incomeInUSD": 162.72,
-      "ether": 0.05040702,
-      "etherPriceOnIncomeDate": 3323.19799054098
-    }
-  ];
 
 const GainLossTransaction = (props) => (
     <tr>
@@ -143,7 +10,6 @@ const GainLossTransaction = (props) => (
         <td>{props.Proceeds}</td>
         <td>{props.Adjustment.toFixed(2)}</td>
         <td>{props.CapitalGainLoss}</td>
-        
     </tr>
 )
 
@@ -164,7 +30,6 @@ function ViewCapitalDifference() {
     }
 
     useEffect(() => {
-        
         const walletTransactions = transactions.walletTransactions;
         console.log(walletTransactions);
         let startRange = epochToEndOfDay(walletTransactions[0].timeStamp);
@@ -220,8 +85,6 @@ function ViewCapitalDifference() {
             setReport(generateGainLossTransactions(incomeTransactionsFromWallet, sellingTransactionsFromExchange));
         })
         .catch(error => console.log('error', error));
-
-        
     }, []);
 
     function transactionList(){
@@ -252,11 +115,21 @@ function ViewCapitalDifference() {
 
         return (<GainLossTransaction AcquireDate="Totals: " SellDate="" CostBasis={costBasisSum} Proceeds={ProceedsSum} CapitalGainLoss={capitalGainSum} Adjustment={AdjustmentSum}/>);
     }
-    
 
-    return (
+    function noWalletTransactions(){
+        return (
+            <h1>No wallet Transactions have been found</h1>
+        )
+    }
+
+    function noExchangeTransactions(){
+        return (
+            <h1>No exchange Transactions have been found</h1>
+        )
+    }
+
+    function renderReport(){
         <div>
-            <NavigationBar/>
             <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
                 <caption><h1>8949:</h1></caption>
                 <thead>
@@ -275,135 +148,11 @@ function ViewCapitalDifference() {
                 </tbody>
             </table>
         </div>
-    );
+    }
+    if(!transactions.walletTransactions){
+        noWalletTransactions();
+    }
+    renderReport();
 }
 
 export default ViewCapitalDifference;
-
-
-/*
-
-<div className="row">
-    <div className="col">
-        <pre>{JSON.stringify(miningTransactions, null, 2)}</pre>
-    </div>
-    <div className="col">
-        <pre>{JSON.stringify(exchangeTransactions, null, 2)}</pre>  
-    </div>
-    <div className="col">
-    <pre>{JSON.stringify(report, null, 2)}</pre>
-    </div>
-</div>
-
-
-function ViewCapitalDifference() {
-    const {transactions} = useContext(TransactionsContext);
-    let wallet = transactions.walletTransactions;
-    let exchange = transactions.exchangeTransactions;
-    const [miningTransactions, setMiningTransactions] = useState([]);
-    //let miningTransactions = [];
-    let exchangeTransactions = [];
-
-    function generateReport(){
-
-        wallet.forEach(element => {
-            var requestOptions = {
-                method: 'GET',
-                redirect: 'follow'
-            };
-            fetch(`http://localhost:5000/price?epoch=${element.timeStamp}`, requestOptions)
-            .then(response => response.text())
-            .then(result => {
-                console.log(result);
-                let walletTransaction = {
-                    value: result,
-                    date: element.timeStamp
-                }
-                console.log("mining transaction during populating: " + JSON.stringify(walletTransaction, null, 2));
-                let tempMiningTransactions = miningTransactions;
-                tempMiningTransactions.push(walletTransaction);
-                setMiningTransactions(tempMiningTransactions);
-                //miningTransactions.push(walletTransaction);
-            })
-            .then(console.log("mining transactions after populating: " + JSON.stringify(miningTransactions, null, 2)))
-            .catch(error => console.log('error', error));
-        });
-
-        console.log("When mining transactions has been populated it is: " + JSON.stringify(miningTransactions, null, 2))
-        
-
-
-        exchange.forEach(element => {
-            if(element["Transaction Type"] === "Sell"){
-                let exchangeTransaction = {
-                    value: element["Proceeds (excl. fees paid) (USD)"],
-                    date: element["Date & time"]
-                }
-                exchangeTransactions.push(exchangeTransaction);
-            }
-            
-        });
-
-        
-    }
-
-    function addElement(){
-        let walletTransaction = {
-            value: 1,
-            date: 2
-        }
-
-        let tempMiningTransactions = miningTransactions;
-        tempMiningTransactions.push(walletTransaction);
-        setMiningTransactions(tempMiningTransactions);
-        //miningTransactions.push(walletTransaction);
-    }
-
-    return (
-        <div>
-            <button className="btn btn-primary" onClick={generateReport}>Generate Capital Gain/Loss report</button>
-            <button className="btn btn-primary" onClick={addElement}>Add sample Transaction to miningTransactions</button>
-            <p>{JSON.stringify(miningTransactions, null, 2)}</p>
-            <p>{JSON.stringify(exchangeTransactions, null, 2)}</p>
-        </div>
-     );
-}
-
-export default ViewCapitalDifference;
-
-
-
-
-const [transactions, setTransaction] = useState({value: 1});
-
-    return ( 
-        <div>
-            <h1>Capital Gain/Loss report</h1>
-            <pre>report: {JSON.stringify(transactions, null, 2)}</pre>
-        </div>
-    );
-
-
-
-
-const [transactions, setTransactions] = useState([{date: 11, value: 2}, {date: 12, value: 3}]);
-
-    const addElement = () => {
-        let newTransaction = {date: 13, value: 4};
-        let currentTransactions = [...transactions];
-        console.log(JSON.stringify(currentTransactions, null, 2))
-        currentTransactions.push(newTransaction);
-        console.log(JSON.stringify(currentTransactions, null, 2))
-        setTransactions(currentTransactions);
-        console.log(JSON.stringify(transactions, null, 2))
-        //setTransactions({...transactions});
-    }
-
-    return ( 
-        <div>
-            <h1>Capital Gain/Loss report</h1>
-            <pre>report: {JSON.stringify(transactions, null, 2)}</pre>
-            <button onClick={addElement}>Press to add new element</button>
-        </div>
-    );
-*/

@@ -4,7 +4,6 @@ import NavigationBar from '../Components/NavigationBar';
 function UploadCSV() {
     return ( 
         <div>
-            <NavigationBar/>
             <div className='container-fluid'>
                 <UploadCSVBox/>
             </div>

@@ -9,7 +9,6 @@ import NavigationBar from '../Components/NavigationBar';
 const LinkWallet = () => {
   return (
     <div>
-        <NavigationBar/>
           <div className='container-fluid'>
             <div className='row'>
               <div className='col'>
