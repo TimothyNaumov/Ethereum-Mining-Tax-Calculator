@@ -129,30 +129,33 @@ function ViewCapitalDifference() {
     }
 
     function renderReport(){
-        <div>
-            <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
-                <caption><h1>8949:</h1></caption>
-                <thead>
-                    <tr>
-                        <th>Acquire Date</th>
-                        <th>Sell Date</th>
-                        <th>Cost Basis</th>
-                        <th>Proceeds</th>
-                        <th>Adjustment</th>
-                        <th>Capital Gain</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {transactionList()}
-                    {transactionSums()}
-                </tbody>
-            </table>
-        </div>
+        return(
+            <div>
+                <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
+                    <caption><h1>8949:</h1></caption>
+                    <thead>
+                        <tr>
+                            <th>Acquire Date</th>
+                            <th>Sell Date</th>
+                            <th>Cost Basis</th>
+                            <th>Proceeds</th>
+                            <th>Adjustment</th>
+                            <th>Capital Gain</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {transactionList()}
+                        {transactionSums()}
+                    </tbody>
+                </table>
+            </div>
+        );
     }
-    if(!transactions.walletTransactions){
-        noWalletTransactions();
-    }
-    renderReport();
+
+    
+    return(
+        renderReport()
+    );
 }
 
 export default ViewCapitalDifference;

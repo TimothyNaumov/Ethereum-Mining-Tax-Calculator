@@ -5,7 +5,6 @@ import LinkWallet from './pages/LinkWallet';
 import MainPage from './pages/MainPage';
 import ViewCapitalDifference from './pages/ViewCapitalDifference';
 import { TransactionsContext } from './TransactionsContext';
-import AccordionExample from './pages/AccordionExample';
 import NavigationBar from './Components/NavigationBar';
 
 function AppRouter(){
@@ -20,7 +19,6 @@ function AppRouter(){
                     <Route path="linkwallet" element={<LinkWallet/>}></Route>
                     <Route path='uploadCSV' element={<UploadCSV/>}/>
                     <Route path='viewCapitalDifference' element={<ViewCapitalDifference/>}/>
-                    <Route path='Accordion' element={<AccordionExample/>}/>
                 </Routes>
             </TransactionsContext.Provider>
         </BrowserRouter>
