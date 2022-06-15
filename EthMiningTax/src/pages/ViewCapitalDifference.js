@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import { TransactionsContext } from "../TransactionsContext";
-import generateGainLossTransactions from '../TaxGenerator';
+import generateGainLossTransactions from '../functions/TaxGenerator';
 
 const GainLossTransaction = (props) => (
     <tr>
@@ -15,8 +15,6 @@ const GainLossTransaction = (props) => (
 
 function ViewCapitalDifference() {
     const {transactions} = useContext(TransactionsContext);
-    let wallet = transactions.walletTransactions;
-    let exchange = transactions.exchangeTransactions;
     const [miningTransactions, setMiningTransactions] = useState([]);
     const [exchangeTransactions, setExchangeTransactions] = useState([]);
     const [report, setReport] = useState([]);
@@ -29,9 +27,8 @@ function ViewCapitalDifference() {
         return wei / Math.pow(10, 18);
     }
 
-    useEffect(() => {
+    async function getHistoricalData(){
         const walletTransactions = transactions.walletTransactions;
-        console.log(walletTransactions);
         let startRange = epochToEndOfDay(walletTransactions[0].timeStamp);
         let endRange = epochToEndOfDay(walletTransactions[walletTransactions.length - 1].timeStamp);
         console.log(`start: ${startRange} end: ${endRange}`);
@@ -39,53 +36,16 @@ function ViewCapitalDifference() {
             method: 'GET',
             redirect: 'follow'
         };
-        fetch(`https://api.coingecko.com/api/v3/coins/ethereum/market_chart/range?vs_currency=usd&from=${startRange}&to=${endRange}`, requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            let pricesAsArray = result.prices;
-            console.log(pricesAsArray);
-            let associativeArray = {};
-            pricesAsArray.forEach(element => {
-                let epoch = element[0];
-                let priceAtEpoch = element[1]
-                associativeArray[epoch] = priceAtEpoch; 
-            });
-            console.log(associativeArray);
-            // * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
-            const incomeTransactionsFromWallet = walletTransactions.filter(element => element.from === "0x750ca59270bdf16507ff977037a49a8cfb6f98b9" && element.value != 0).map(element => (
-                {
-                    epoch: element.timeStamp,
-                    isoDate: new Date(element.timeStamp * 1000),
-                    incomeInUSD: toEther(element.value) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)],
-                    ether: toEther(element.value),
-                    etherPriceOnIncomeDate: associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)],
-                    TransactionFeeQuantity: toEther(element.gasPrice * element.gasUsed),
-                    TransactionFeePrice: toEther(element.gasPrice * element.gasUsed) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
-                }
-            ));
-            setMiningTransactions(incomeTransactionsFromWallet);
+        const rawHistoricalData = await fetch(`https://api.coingecko.com/api/v3/coins/ethereum/market_chart/range?vs_currency=usd&from=${startRange}&to=${endRange}`, requestOptions);
+        const historicalData = await rawHistoricalData.json();
+        
+    }
 
-            const exchangeTransactions = transactions.exchangeTransactions;
-            const sellingTransactionsFromExchange = exchangeTransactions.filter(element => element["Transaction Type"] === "Sell").map(element => (
-            //commented out filter operation to inlclude coinbase income transactions for FIFO test on CoinTracker
-            //const sellingTransactionsFromExchange = exchangeTransactions.map(element => (
-                {
-                    Date: element["Date & time"],
-                    Type: element["Transaction Type"],
-                    Epoch: new Date(element["Date & time"]).getTime(),
-                    EpochAtEndOfDay: epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000),
-                    Proceeds: element["Proceeds (excl. fees paid) (USD)"],
-                    QuantityDisposed: element["Quantity Disposed"],
-                    EtherPriceOnSellDate: associativeArray[epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000) * 1000]
-                }
-            ));
-            //associativeArray[(epochToEndOfDay(new Date(element["Date & time"]).getTime()) * 1000)]
-            setExchangeTransactions(sellingTransactionsFromExchange);
-            //temporarily using testcaseincome1 for income tranactions to test cointracker fifo report
-            setReport(generateGainLossTransactions(incomeTransactionsFromWallet, sellingTransactionsFromExchange));
-        })
-        .catch(error => console.log('error', error));
+    useEffect(() => {
+        getHistoricalData();
     }, []);
+
+    
 
     function transactionList(){
         return report.map((transaction) => {
@@ -159,3 +119,32 @@ function ViewCapitalDifference() {
 }
 
 export default ViewCapitalDifference;
+
+/*
+associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
+const incomeTransactionsFromWallet = walletTransactions.filter(element => element.from === "0x750ca59270bdf16507ff977037a49a8cfb6f98b9" && element.value != 0).map(element => (
+{
+    epoch: element.timeStamp,
+    isoDate: new Date(element.timeStamp * 1000),
+    incomeInUSD: toEther(element.value) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)],
+    ether: toEther(element.value),
+    etherPriceOnIncomeDate: associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)],
+    TransactionFeeQuantity: toEther(element.gasPrice * element.gasUsed),
+    TransactionFeePrice: toEther(element.gasPrice * element.gasUsed) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
+}
+));
+
+const sellingTransactionsFromExchange = exchangeTransactions.filter(element => element["Transaction Type"] === "Sell").map(element => (
+//commented out filter operation to inlclude coinbase income transactions for FIFO test on CoinTracker
+//const sellingTransactionsFromExchange = exchangeTransactions.map(element => (
+    {
+        Date: element["Date & time"],
+        Type: element["Transaction Type"],
+        Epoch: new Date(element["Date & time"]).getTime(),
+        EpochAtEndOfDay: epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000),
+        Proceeds: element["Proceeds (excl. fees paid) (USD)"],
+        QuantityDisposed: element["Quantity Disposed"],
+        EtherPriceOnSellDate: associativeArray[epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000) * 1000]
+    }
+));
+*/
