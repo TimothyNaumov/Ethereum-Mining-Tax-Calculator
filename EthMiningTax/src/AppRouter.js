@@ -6,22 +6,13 @@ import MainPage from './pages/MainPage';
 import ViewCapitalDifference from './pages/ViewCapitalDifference';
 import { TransactionsContext } from './TransactionsContext';
 import NavigationBar from './Components/NavigationBar';
+import SingleMainPage from './pages/SingleMainPage';
 
 function AppRouter(){
     const [transactions, setTransactions] = useState({address: null, walletTransactions: null, exchangeTransactions: null});
 
     return (
-        <BrowserRouter>
-            <NavigationBar/>
-            <TransactionsContext.Provider value={{transactions, setTransactions}}>
-                <Routes>
-                    <Route path="/" element={<MainPage/>}></Route>
-                    <Route path="linkwallet" element={<LinkWallet/>}></Route>
-                    <Route path='uploadCSV' element={<UploadCSV/>}/>
-                    <Route path='viewCapitalDifference' element={<ViewCapitalDifference/>}/>
-                </Routes>
-            </TransactionsContext.Provider>
-        </BrowserRouter>
+        <SingleMainPage/>
     )
 }
 
