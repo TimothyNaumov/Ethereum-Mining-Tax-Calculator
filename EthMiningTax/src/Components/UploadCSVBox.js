@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import Papa from 'papaparse';
-import { TransactionsContext } from '../TransactionsContext';
-import {Link} from 'react-router-dom';
+//import { TransactionsContext } from '../TransactionsContext';
 
 function UploadCSV() {
     const [file, setFile] = useState();
@@ -9,7 +8,7 @@ function UploadCSV() {
     const [tableRows, setTableRows] = useState([]);
     const [values, setValues] = useState([]);
     const [sellValueUSD, setSellValueUSD] = useState([]);
-    const {transactions, setTransactions} = useContext(TransactionsContext);
+    //const {transactions, setTransactions} = useContext(TransactionsContext);
 
     function onChange(e){
         setFile(e.target.files[0]);
@@ -44,11 +43,11 @@ function UploadCSV() {
 
                 setParsedData(results.data);
                 //console.log("Trying to access globalTransactions in csv upload with: " + JSON.stringify(transactions, null, 2));
-                let currentGlobalState = transactions;
+                //let currentGlobalState = transactions;
                 //currentGlobalState.exchangeTransactions = results.data;
-                currentGlobalState.exchangeTransactions = results.data;
-                console.log("Trying to set globalTransactions in csv upload with: " + JSON.stringify(currentGlobalState, null, 2));
-                setTransactions(currentGlobalState);
+                //currentGlobalState.exchangeTransactions = results.data;
+                //console.log("Trying to set globalTransactions in csv upload with: " + JSON.stringify(currentGlobalState, null, 2));
+                //setTransactions(currentGlobalState);
 
                 setTableRows(rowsArray[0]);
 
@@ -90,31 +89,6 @@ function UploadCSV() {
                     </div>
                     
                 </div>
-                <Link to="/viewCapitalDifference" className="btn btn-primary">View your Capital Gain/Loss report</Link>
-            </div>
-            {/* Table */}
-            <div>
-                <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
-                    <caption><h1>Coinbase Transactions:</h1></caption>
-                    <thead>
-                    <tr>
-                        {tableRows.map((rows, index) => {
-                        return <th key={index}>{rows}</th>;
-                        })}
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {values.map((value, index) => {
-                        return (
-                        <tr key={index}>
-                            {value.map((val, i) => {
-                            return <td key={i}>{val}</td>;
-                            })}
-                        </tr>
-                        );
-                    })}
-                    </tbody>
-                </table>
             </div>
         </div>
      );
