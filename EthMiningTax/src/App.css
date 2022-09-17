@@ -59,13 +59,38 @@
   position: relative;
   height: 600px;
   overflow: scroll;
+
 }
 .table-wrapper-scroll-y {
   display: block;
 }
 
 bg-myRed{
-  background-color: crimson;
+  background-color: rgb(145, 145, 145);
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 4px;  
+  border: 1px solid #d5d5d5;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey; 
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(80, 80, 80); 
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8d8d8d; 
 }
 
 /********************** Main Page Jumbo **********************/

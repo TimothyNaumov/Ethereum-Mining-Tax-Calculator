@@ -80,7 +80,7 @@ function MainPage(){
                     <h4>0.37911862071608077  ETH</h4>
                     <h4>$ 539.60</h4>
                     
-                    <div className='table-wrapper-scroll-y my-custom-scrollbar'>
+                    <div className='table-wrapper-scroll-y my-custom-scrollbar table-striped table-hover'>
                         <Table responsive size='sm'>
                             <thead>
                                 <tr>
