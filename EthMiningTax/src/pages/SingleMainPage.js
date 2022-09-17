@@ -1,22 +1,27 @@
-import {Container, Row, Form } from 'react-bootstrap'
+import {Container, Row, Form, Table } from 'react-bootstrap'
 import React, { useState } from "react";
 import axios from 'axios';
+import '../App.css';
 
 function toEther(wei){
-    return  wei / Math.pow(10, 18);
+    return (wei / Math.pow(10, 18)).toFixed(3);
 }
 
 function toHumanTime(epochTime){
-    return new Date( epochTime * 1000);
+    let date = new Date( epochTime * 1000);
+    return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+      });
 }
 
 const Transaction = (props) => (
     <tr>
-        <td>{props.hash}</td>
         <td>{`${toHumanTime(props.timeStamp).toString()}`}</td>
         <td>{props.from}</td>
         <td>{props.to}</td>
-        <td>{`${toEther(props.value)} Ether`}</td>
+        <td>{`${toEther(props.value)} ETH`}</td>
     </tr>
 );
 
@@ -33,7 +38,7 @@ function MainPage(){
         if(target.charCode === 13){
             alert(`You tried to submit your adress as ${address}`);
 
-            axios.get(`http://localhost:4000/transactions?address=${address}`)
+            axios.get(`http://localhost:4000/wallet/transactions/${address}`)
             .then(res => {
                 const importedWalletTransactions = res.data;
                 setWalletTransactions(importedWalletTransactions);
@@ -68,28 +73,26 @@ function MainPage(){
             </Container>
             
         </div>
-        <div className="d-flex align-items-center">
+        <div className="align-items-center">
             <Container>
                 <div className="p-5 my-4 rounded-5 bg-light" align="left">
                     <h1>{address}</h1>
                     <h4>0.37911862071608077  ETH</h4>
                     <h4>$ 539.60</h4>
-
-                    <div className="table-wrapper-scoll-y my-custom-scrollbar">
-                    <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
-                        <caption><h1>Wallet Transactions:</h1></caption>
-                        <thead>
-                            <tr>
-                                <th>Transaction Hash</th>
-                                <th>Date and Time</th>
-                                <th>From</th>
-                                <th>To</th>
-                                <th>Value</th>
-                            </tr>
-                        </thead>
-                        <tbody>{transactionList()}</tbody>
-                    </table>
-        </div>
+                    
+                    <div className='table-wrapper-scroll-y my-custom-scrollbar'>
+                        <Table responsive size='sm'>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>From</th>
+                                    <th>To</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>{transactionList()}</tbody>
+                        </Table>
+                    </div>
                 </div>
             </Container>
         </div>
@@ -98,6 +101,24 @@ function MainPage(){
 }
  
 export default MainPage;
+
+/*
+{/*<div className="table-wrapper-scoll-y my-custom-scrollbar">}
+<table id="dtVerticalScrollExample" className="table table-light table-striped table-hover caption-top" size="sm">
+<caption><h1>Wallet Transactions:</h1></caption>
+<thead>
+    <tr>
+        <th>Transaction Hash</th>
+        <th>Date and Time</th>
+        <th>From</th>
+        <th>To</th>
+        <th>Value</th>
+    </tr>
+</thead>
+<tbody>{transactionList()}</tbody>
+</table>
+{/*</div>}
+*/
 
 /*<Container fluid="sm" >
             <Row className="justify-content-md-center">
