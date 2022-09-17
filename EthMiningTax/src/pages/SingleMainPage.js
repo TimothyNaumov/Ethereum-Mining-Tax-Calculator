@@ -1,10 +1,28 @@
 import {Container, Row, Form } from 'react-bootstrap'
 import React, { useState } from "react";
-import AddressInput from '../Components/AddressInput';
-import UploadCSVBox from '../Components/UploadCSVBox';
+import axios from 'axios';
+
+function toEther(wei){
+    return  wei / Math.pow(10, 18);
+}
+
+function toHumanTime(epochTime){
+    return new Date( epochTime * 1000);
+}
+
+const Transaction = (props) => (
+    <tr>
+        <td>{props.hash}</td>
+        <td>{`${toHumanTime(props.timeStamp).toString()}`}</td>
+        <td>{props.from}</td>
+        <td>{props.to}</td>
+        <td>{`${toEther(props.value)} Ether`}</td>
+    </tr>
+);
 
 function MainPage(){
     const [address, setAddress] = useState("");
+    const [walletTransactions, setWalletTransactions] = useState([]);
 
     function handleAddressChange(e){
         e.preventDefault();
@@ -12,30 +30,68 @@ function MainPage(){
     }
 
     function handleKeyPress(target){
-        if(target.charCode == 13){
+        if(target.charCode === 13){
             alert(`You tried to submit your adress as ${address}`);
+
+            axios.get(`http://localhost:4000/transactions?address=${address}`)
+            .then(res => {
+                const importedWalletTransactions = res.data;
+                setWalletTransactions(importedWalletTransactions);
+            })
         }
     }
+
+    function transactionList(){
+        console.log(`Transactions is ${walletTransactions}`);
+        
+        return walletTransactions.map((transaction) => {
+            return (
+                <Transaction hash={transaction.hash} timeStamp={transaction.timeStamp} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
+            );
+        });
+        
+    };
 
     return ( 
       <>
         <div className="d-flex align-items-center">
             <Container>
-                <Row className="justify-content-md-center">
-                    <div align="center">
-                        <h1>Ethereum Mining Tools</h1>
-                    </div>
+                <Row className="justify-content-md-center" align="center">
+                    <h1>Ethereum Mining Tools</h1>
                 </Row>
-                <Row className="justify-content-md-center">
-                <div align="center">
+                <Row className="justify-content-md-center" align="center">
                     <p className="lead">Generate your 8949 for your Sales and Other Dispositions of Capital Assets using your Ethereum mining wallet and a list of transactions from your exchange</p>
-                </div>
                 </Row>
-                <Row className="justify-content-md-center">
+                <Row className="justify-content-md-center" align="center">
                     <Form.Control size="lg" type="text" placeholder="Let's start with your public Ethereum wallet address" onChange={handleAddressChange} onKeyPress={handleKeyPress}/>
                 </Row>
             </Container>
             
+        </div>
+        <div className="d-flex align-items-center">
+            <Container>
+                <div className="p-5 my-4 rounded-5 bg-light" align="left">
+                    <h1>{address}</h1>
+                    <h4>0.37911862071608077  ETH</h4>
+                    <h4>$ 539.60</h4>
+
+                    <div className="table-wrapper-scoll-y my-custom-scrollbar">
+                    <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
+                        <caption><h1>Wallet Transactions:</h1></caption>
+                        <thead>
+                            <tr>
+                                <th>Transaction Hash</th>
+                                <th>Date and Time</th>
+                                <th>From</th>
+                                <th>To</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody>{transactionList()}</tbody>
+                    </table>
+        </div>
+                </div>
+            </Container>
         </div>
       </>
      );
