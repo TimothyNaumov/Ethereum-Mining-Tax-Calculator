@@ -1,33 +1,15 @@
-import {Container, Row, Form, Table } from 'react-bootstrap'
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from 'axios';
 import '../App.css';
-
-function toEther(wei){
-    return (wei / Math.pow(10, 18)).toFixed(3);
-}
-
-function toHumanTime(epochTime){
-    let date = new Date( epochTime * 1000);
-    return date.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-      });
-}
-
-const Transaction = (props) => (
-    <tr>
-        <td>{`${toHumanTime(props.timeStamp).toString()}`}</td>
-        <td>{props.from}</td>
-        <td>{props.to}</td>
-        <td>{`${toEther(props.value)} ETH`}</td>
-    </tr>
-);
+import WalletView from '../Components/SinglePageViews/WalletView';
+import AddressInputView from '../Components/SinglePageViews/AddressInputView';
 
 function MainPage(){
     const [address, setAddress] = useState("");
+    const [balance, setBalance] = useState(0);
     const [walletTransactions, setWalletTransactions] = useState([]);
+
+    const ref = useRef(null);
 
     function handleAddressChange(e){
         e.preventDefault();
@@ -36,66 +18,32 @@ function MainPage(){
 
     function handleKeyPress(target){
         if(target.charCode === 13){
-            alert(`You tried to submit your adress as ${address}`);
+            //alert(`You tried to submit your adress as ${address}`);
+            ref.current?.scrollIntoView({behavior: 'smooth'});
+
+            axios.get(`http://localhost:4000/wallet/balance/${address}`)
+            .then(res => {
+                const balance = res.data;
+                setBalance(balance);
+            })
 
             axios.get(`http://localhost:4000/wallet/transactions/${address}`)
             .then(res => {
                 const importedWalletTransactions = res.data;
                 setWalletTransactions(importedWalletTransactions);
             })
+
         }
     }
 
-    function transactionList(){
-        console.log(`Transactions is ${walletTransactions}`);
-        
-        return walletTransactions.map((transaction) => {
-            return (
-                <Transaction hash={transaction.hash} timeStamp={transaction.timeStamp} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
-            );
-        });
-        
-    };
-
     return ( 
       <>
-        <div className="d-flex align-items-center">
-            <Container>
-                <Row className="justify-content-md-center" align="center">
-                    <h1>Ethereum Mining Tools</h1>
-                </Row>
-                <Row className="justify-content-md-center" align="center">
-                    <p className="lead">Generate your 8949 for your Sales and Other Dispositions of Capital Assets using your Ethereum mining wallet and a list of transactions from your exchange</p>
-                </Row>
-                <Row className="justify-content-md-center" align="center">
-                    <Form.Control size="lg" type="text" placeholder="Let's start with your public Ethereum wallet address" onChange={handleAddressChange} onKeyPress={handleKeyPress}/>
-                </Row>
-            </Container>
-            
-        </div>
-        <div className="align-items-center">
-            <Container>
-                <div className="p-5 my-4 rounded-5 bg-light" align="left">
-                    <h1>{address}</h1>
-                    <h4>0.37911862071608077  ETH</h4>
-                    <h4>$ 539.60</h4>
-                    
-                    <div className='table-wrapper-scroll-y my-custom-scrollbar table-striped table-hover'>
-                        <Table responsive size='sm'>
-                            <thead>
-                                <tr>
-                                    <th>Date</th>
-                                    <th>From</th>
-                                    <th>To</th>
-                                    <th>Value</th>
-                                </tr>
-                            </thead>
-                            <tbody>{transactionList()}</tbody>
-                        </Table>
-                    </div>
-                </div>
-            </Container>
-        </div>
+        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress}/>
+        {address !== "" && 
+            <div ref={ref}>
+                <WalletView address={address} walletTransactions={walletTransactions} balance={balance}/>
+            </div>
+        }
       </>
      );
 }

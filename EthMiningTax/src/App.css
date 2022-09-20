@@ -55,6 +55,14 @@
   padding: 0;
 }
 
+/* LARGE SCREEN SIZED COMPONENT SECTION*/
+.component-section{
+  width:100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
 .my-custom-scrollbar {
   position: relative;
   height: 600px;
