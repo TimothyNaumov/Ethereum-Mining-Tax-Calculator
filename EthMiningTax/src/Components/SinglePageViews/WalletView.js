@@ -27,7 +27,7 @@ const WalletView = (props) => {
     
 
     function transactionList(){
-        console.log(`Transactions is ${props.walletTransactions}`);
+        //console.log(`Transactions is ${props.walletTransactions}`);
         
         return props.walletTransactions.map((transaction) => {
             return (
