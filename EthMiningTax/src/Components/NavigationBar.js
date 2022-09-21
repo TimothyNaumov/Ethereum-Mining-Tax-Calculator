@@ -11,7 +11,7 @@ function NavigationBar() {
             <Navbar.Toggle/>
             <Navbar.Collapse>
                 <Nav>
-                    <Nav.Link href="/"> Genearte 8949 Form</Nav.Link>
+                    <Nav.Link href="/"> Generate 8949 Form</Nav.Link>
                     <NavDropdown title="Help">
                         <NavDropdown.Item>How to link public Ethereum wallet</NavDropdown.Item>
                         <NavDropdown.Divider/>
