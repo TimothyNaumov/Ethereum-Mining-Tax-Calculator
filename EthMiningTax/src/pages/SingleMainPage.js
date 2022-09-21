@@ -19,26 +19,32 @@ function MainPage(){
         setAddress(e.target.value);
     }
 
-    function handleKeyPress(target){
+    async function handleKeyPress(target){
         if(target.charCode === 13){
             //alert(`You tried to submit your adress as ${address}`);
             console.log("Changing address");
             setValidAddress(true);
-            ref.current?.scrollIntoView({behavior: 'smooth'});
-            
-            axios.get(`http://localhost:4000/wallet/balance/${address}`)
-            .then(res => {
-                const balance = res.data;
-                setBalance(balance);
-            })
-
-            axios.get(`http://localhost:4000/wallet/transactions/${address}`)
-            .then(res => {
-                const importedWalletTransactions = res.data;
-                setWalletTransactions(importedWalletTransactions);
-            })
-            
             //ref.current?.scrollIntoView({behavior: 'smooth'});
+            
+            const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${address}`);
+            //.then(res => {
+                
+            //})
+            const balance = walletBalance.data;
+            if(balance){
+                setValidAddress(true);
+            }
+            setBalance(balance);
+
+            const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${address}`);
+            const importedWalletTransactions = walletTransactionResponse.data;
+            setWalletTransactions(importedWalletTransactions);
+            //.then(res => {
+                //const importedWalletTransactions = res.data;
+                //setWalletTransactions(importedWalletTransactions);
+            //})
+            
+            ref.current?.scrollIntoView({behavior: 'smooth'});
         }
     }
     /*
@@ -51,13 +57,12 @@ function MainPage(){
       }
     }, [validAddress])
     */
-    
 
     return (
       <>
         <NavigationBar/>
         <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress}/>
-        {address !== "" && 
+        {validAddress && 
             <div ref={ref}>
                 <WalletView address={address} walletTransactions={walletTransactions} balance={balance}/>
             </div>
