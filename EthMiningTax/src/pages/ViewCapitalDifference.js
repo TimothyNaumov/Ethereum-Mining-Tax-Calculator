@@ -131,7 +131,7 @@ function ViewCapitalDifference() {
     function renderReport(){
         return(
             <div>
-                <table id="dtVerticalScrollExample" className="table table-dark table-striped table-hover caption-top" style={{ marginTop: 20 }}>
+                <table id="dtVerticalScrollExample" className="table table-light table-striped table-hover caption-top" style={{ marginTop: 20 }}>
                     <caption><h1>8949:</h1></caption>
                     <thead>
                         <tr>
