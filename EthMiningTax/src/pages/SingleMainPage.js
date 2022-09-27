@@ -9,12 +9,19 @@ function MainPage(){
     const [address, setAddress] = useState("");
     const [balance, setBalance] = useState({ eth: 0, usd: 0});
     const [walletTransactions, setWalletTransactions] = useState([]);
+    const [walletVerified, setWalletVerified] = useState(false);
 
     const ref = useRef(null);
 
     function handleAddressChange(e){
         e.preventDefault();
         setAddress(e.target.value);
+    }
+
+    function resetView(){
+        setAddress("");
+        setBalance({ eth: 0, usd: 0});
+        setWalletTransactions([]);
     }
 
     async function handleKeyPress(target){
@@ -39,7 +46,7 @@ function MainPage(){
 
     useEffect(() => {
         ref.current?.scrollIntoView({behavior: 'smooth'});
-    }, [balance])
+    }, [balance, walletVerified])
     
 
     return (
@@ -48,9 +55,15 @@ function MainPage(){
         <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress}/>
         {balance.usd && 
             <div ref={ref}>
-                <WalletView address={address} walletTransactions={walletTransactions} balance={balance}/>
+                <WalletView address={address} walletTransactions={walletTransactions} balance={balance} setWalletVerified={setWalletVerified} resetView={resetView}/>
             </div>
         }
+        {walletVerified && 
+            <div ref={ref}>
+                <h1>You are ready to submit your exchange transactions!</h1>
+            </div>
+        }
+        
       </>
      );
 }

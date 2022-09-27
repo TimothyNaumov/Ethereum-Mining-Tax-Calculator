@@ -27,10 +27,12 @@ const WalletView = (props) => {
 
     function clickedYes(){
         console.log("You are ready to proceed");
+        props.setWalletVerified(true);
     }
 
     function clickedNo(){
         console.log("You are not ready to proceed");
+        props.resetView();
     }
     
 
