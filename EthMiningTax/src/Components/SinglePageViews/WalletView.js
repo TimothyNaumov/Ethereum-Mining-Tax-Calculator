@@ -41,8 +41,8 @@ const WalletView = (props) => {
                 <Container>
                     <div className="p-5 my-4 rounded-5 bg-light" align="left">
                         <h1>{props.address}</h1>
-                        <h4>{props.balance}  ETH</h4>
-                        <h4>$ 3,141,265.35</h4>
+                        <h4>{props.balance.eth}  ETH</h4>
+                        <h4>$ {props.balance.usd}</h4>
                         
                         <div className='table-wrapper-scroll-y my-custom-scrollbar table-striped table-hover'>
                             <Table responsive size='sm'>
