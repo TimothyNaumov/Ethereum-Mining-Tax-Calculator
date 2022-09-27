@@ -55,6 +55,17 @@
   padding: 0;
 }
 
+.confirmationtext{
+  padding: 50px 0px 0px 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.confirmationtextElement{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
 /* LARGE SCREEN SIZED COMPONENT SECTION*/
 .component-section{
   width:100%;

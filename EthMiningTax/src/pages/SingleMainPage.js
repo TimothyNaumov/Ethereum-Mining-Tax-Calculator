@@ -46,7 +46,7 @@ function MainPage(){
       <>
         <NavigationBar/>
         <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress}/>
-        {balance && 
+        {balance.usd && 
             <div ref={ref}>
                 <WalletView address={address} walletTransactions={walletTransactions} balance={balance}/>
             </div>
