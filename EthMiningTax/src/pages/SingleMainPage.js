@@ -4,6 +4,7 @@ import '../App.css';
 import WalletView from '../Components/SinglePageViews/WalletView';
 import AddressInputView from '../Components/SinglePageViews/AddressInputView';
 import NavigationBar from "../Components/NavigationBar";
+import ExchangeImportView from "../Components/SinglePageViews/ExchangeImportView";
 
 function MainPage(){
     const [address, setAddress] = useState("");
@@ -60,7 +61,7 @@ function MainPage(){
         }
         {walletVerified && 
             <div ref={ref}>
-                <h1>You are ready to submit your exchange transactions!</h1>
+                <ExchangeImportView/>
             </div>
         }
         

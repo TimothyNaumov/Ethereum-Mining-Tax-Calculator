@@ -55,10 +55,10 @@
   padding: 0;
 }
 
-.confirmationtext{
-  padding: 50px 0px 0px 50px;
+.confirmation-container{
   display: flex;
   justify-content: center;
+  padding-top: 50px;
 }
 
 .confirmationtextElement{

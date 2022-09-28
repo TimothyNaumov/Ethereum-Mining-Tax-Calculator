@@ -67,7 +67,7 @@ const WalletView = (props) => {
                         <tbody>{transactionList()}</tbody>
                         </Table>
                     </div>
-                    <div className="text-center confirmationtext">
+                    <div className="align-items-center confirmation-container">
                         <div className="confirmationtextElement">
                             <h2>Is this your wallet?</h2>
                         </div>
