@@ -11,8 +11,6 @@ const Transaction = (props) => (
 );
 
 const sellTransactionView = (props) => {
-    
-
     function transactionList(){
         return props.sellTransactions.map((transaction) => {
             return (

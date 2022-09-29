@@ -13,7 +13,7 @@ const GainLossTransaction = (props) => (
     </tr>
 )
 
-function ViewCapitalDifference() {
+const ViewCapitalDifference = (props) => {
     const {transactions} = useContext(TransactionsContext);
     let wallet = transactions.walletTransactions;
     let exchange = transactions.exchangeTransactions;
@@ -30,7 +30,7 @@ function ViewCapitalDifference() {
     }
 
     useEffect(() => {
-        const walletTransactions = transactions.walletTransactions;
+        const walletTransactions = wallet
         console.log(walletTransactions);
         let startRange = epochToEndOfDay(walletTransactions[0].timeStamp);
         let endRange = epochToEndOfDay(walletTransactions[walletTransactions.length - 1].timeStamp);
@@ -65,7 +65,7 @@ function ViewCapitalDifference() {
             ));
             setMiningTransactions(incomeTransactionsFromWallet);
 
-            const exchangeTransactions = transactions.exchangeTransactions;
+            const exchangeTransactions = wallet;
             const sellingTransactionsFromExchange = exchangeTransactions.filter(element => element["Transaction Type"] === "Sell").map(element => (
             //commented out filter operation to inlclude coinbase income transactions for FIFO test on CoinTracker
             //const sellingTransactionsFromExchange = exchangeTransactions.map(element => (

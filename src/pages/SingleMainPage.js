@@ -6,6 +6,8 @@ import AddressInputView from '../Components/SinglePageViews/AddressInputView';
 import NavigationBar from "../Components/NavigationBar";
 import ExchangeImportView from "../Components/SinglePageViews/ExchangeImportView";
 import SellTransactionView from "../Components/SinglePageViews/SellTransactionView";
+import GainLossReport from "../Components/SinglePageViews/GainLossReportView";
+import reportData from "../Testing/MockReportValues";
 
 function MainPage(){
     const [address, setAddress] = useState("");
@@ -77,7 +79,7 @@ function MainPage(){
         {
             generateReport &&
             <div ref={ref}>
-                <SellTransactionView sellTransactions={sellTransactions}/>
+                <GainLossReport walletTransactions={walletTransactions} exchangeTransactions={sellTransactions} mockData={reportData}/>
             </div>
         }
         
