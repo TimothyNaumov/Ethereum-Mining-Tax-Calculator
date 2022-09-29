@@ -5,12 +5,16 @@ import WalletView from '../Components/SinglePageViews/WalletView';
 import AddressInputView from '../Components/SinglePageViews/AddressInputView';
 import NavigationBar from "../Components/NavigationBar";
 import ExchangeImportView from "../Components/SinglePageViews/ExchangeImportView";
+import SellTransactionView from "../Components/SinglePageViews/SellTransactionView";
 
 function MainPage(){
     const [address, setAddress] = useState("");
     const [balance, setBalance] = useState({ eth: 0, usd: 0});
     const [walletTransactions, setWalletTransactions] = useState([]);
     const [walletVerified, setWalletVerified] = useState(false);
+    const [CSVUploaded, setCSVUploaded] = useState(false);
+    const [sellTransactions, setSellTransactions] = useState([]);
+    const [generateReport, setGenerateReport] = useState(false);
 
     const ref = useRef(null);
 
@@ -47,7 +51,7 @@ function MainPage(){
 
     useEffect(() => {
         ref.current?.scrollIntoView({behavior: 'smooth'});
-    }, [balance, walletVerified])
+    }, [balance, walletVerified, CSVUploaded, generateReport])
     
 
     return (
@@ -61,7 +65,19 @@ function MainPage(){
         }
         {walletVerified && 
             <div ref={ref}>
-                <ExchangeImportView/>
+                <ExchangeImportView setCSVUploaded={setCSVUploaded} setSellTransactions={setSellTransactions}/>
+            </div>
+        }
+        {
+            CSVUploaded && 
+            <div ref={ref}>
+                <SellTransactionView sellTransactions={sellTransactions} setGenerateReport={setGenerateReport}/>
+            </div>
+        }
+        {
+            generateReport &&
+            <div ref={ref}>
+                <SellTransactionView sellTransactions={sellTransactions}/>
             </div>
         }
         

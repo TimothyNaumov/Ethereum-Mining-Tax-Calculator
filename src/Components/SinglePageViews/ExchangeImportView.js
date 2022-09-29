@@ -3,7 +3,7 @@ import Papa from 'papaparse';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap'
 import { ArrowDown } from 'react-bootstrap-icons';
 
-function UploadCSV() {
+const UploadCSV = (props) => {
     const [file, setFile] = useState();
     const [parsedData, setParsedData] = useState([]);
     const [tableRows, setTableRows] = useState([]);
@@ -30,11 +30,12 @@ function UploadCSV() {
                     if(transactionType === 'Sell'){
                         const transactionDate = Object.values(d)[2];
                         const quantityDisposed = Object.values(d)[8];
-                         const proceeds = Object.values(d)[9]
+                        const proceeds = Object.values(d)[9]
                         console.log(`transaction type is ${transactionType} with selling values of ${quantityDisposed} worth ${proceeds} USD`);
                         const sellTransaction = {
                             sellingDate: transactionDate,
-                            proceedsUSD: proceeds
+                            proceedsUSD: proceeds,
+                            proceedsETH: quantityDisposed
                         };
                         sellingTransactions.push(sellTransaction);
                     }
@@ -47,8 +48,11 @@ function UploadCSV() {
                 setValues(valuesArray);
 
                 setSellValueUSD(sellingTransactions);
+
+                props.setSellTransactions(sellingTransactions);
             },
         });
+        props.setCSVUploaded(true);
     };
 
 
@@ -63,7 +67,7 @@ function UploadCSV() {
                     <p className="lead">Your capital gain/loss is determined from the proceeds of your selling transactions. Upload a csv of your coinbase transactions to determine and identify your selling transactions. For more information click on help at the top</p>
                 </Row>
                 <Row className="justify-content-md-center" align="center">
-                    <Form.Group controlId="formFile" className="mb-3">
+                    <Form.Group className="mb-3">
                         <Form.Control type="file" className='form-control' id="csvFileInput" size="lg" accept={".csv"} onChange={onChange} />
                     </Form.Group>
                 </Row>
