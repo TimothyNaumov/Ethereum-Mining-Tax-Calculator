@@ -1,6 +1,7 @@
 import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
 import '../App.css';
 import logo from '../logo.svg';
+import {Link} from "react-router-dom";
 
 function NavigationBar() {
     return ( 
@@ -13,7 +14,7 @@ function NavigationBar() {
                 <Nav>
                     <Nav.Link href="/"> Generate 8949 Form</Nav.Link>
                     <NavDropdown title="Help">
-                        <NavDropdown.Item>How to link public Ethereum wallet</NavDropdown.Item>
+                        <NavDropdown.Item><Link to="/help">How to link public Ethereum wallet</Link></NavDropdown.Item>
                         <NavDropdown.Divider/>
                         <NavDropdown.Item>How to get Coinbase CSV</NavDropdown.Item>
                         <NavDropdown.Item>How to upload Coinbase CSV</NavDropdown.Item>
