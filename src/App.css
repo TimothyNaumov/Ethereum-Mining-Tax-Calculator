@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
 
 * {
   font-size: 100%;
@@ -84,7 +83,6 @@
   position: relative;
   height: 600px;
   overflow: scroll;
-
 }
 .table-wrapper-scroll-y {
   display: block;
@@ -160,6 +158,50 @@ bg-myRed{
 
 /*************************** Help ****************************/
 .help-title-banner{
-  height: 300px;
-  width: auto;
+  background-color: #e4e4e4;
+  height: 100%;
+}
+
+.help-title-text{
+  font-size: 50px;
+  font-weight: 800;
+}
+
+.help-content-container{
+  background-color: #f3f3f3;
+}
+
+.help-content-text{
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.dropdown-item a{
+  text-decoration: none;
+  color: #b5bac4;
+}
+
+/* MAIN PAGE */
+
+.main-page-title{
+  font-size: 75px;
+  font-family: Poppins;
+  font-weight: 800;
+}
+
+.main-page-disclaimer{
+  font-size: 30px;
+  color: #3685fa;
+}
+
+.demo-button{
+  width: 125px;
+  height: 60px;
+  padding: 0px 0px 0px 0px;
+}
+
+/* VIEWS */
+
+.info-table{
+  box-shadow: 0 0px 60px 15px rgba(100, 100, 100, 0.2);
 }

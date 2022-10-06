@@ -17,6 +17,7 @@ function MainPage(){
     const [CSVUploaded, setCSVUploaded] = useState(false);
     const [sellTransactions, setSellTransactions] = useState([]);
     const [generateReport, setGenerateReport] = useState(false);
+    const [inDemo, setInDemo] = useState(false);
 
     const ref = useRef(null);
 
@@ -33,34 +34,44 @@ function MainPage(){
 
     async function handleKeyPress(target){
         if(target.charCode === 13){
-            try{
-                const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${address}`);
-                const importedWalletTransactions = walletTransactionResponse.data;
-                setWalletTransactions(importedWalletTransactions);
-            } catch(err){
-                console.log(err);
-            }
-            
-            try{
-                const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${address}`);
-                const balance = walletBalance.data;
-                setBalance(balance);
-            } catch(err){
-                console.log(err);
-            }
+            getWalletInfo();
+        }
+    }
+
+    async function getWalletInfo(){
+        try{
+            const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${address}`);
+            const importedWalletTransactions = walletTransactionResponse.data;
+            setWalletTransactions(importedWalletTransactions);
+        } catch(err){
+            console.log(err);
+        }
+        try{
+            const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${address}`);
+            const balance = walletBalance.data;
+            setBalance(balance);
+        } catch(err){
+            console.log(err);
         }
     }
 
     useEffect(() => {
         ref.current?.scrollIntoView({behavior: 'smooth'});
     }, [balance, walletVerified, CSVUploaded, generateReport])
+
+    useEffect(() => {
+        if(inDemo){
+            setAddress("TEST");
+            getWalletInfo();
+        }
+    }, [inDemo])
     
 
     return (
       <>
         <NavigationBar/>
-        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress}/>
-        {balance.usd && 
+        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress} setInDemo={setInDemo}/>
+        {(balance.usd || inDemo) && 
             <div ref={ref}>
                 <WalletView address={address} walletTransactions={walletTransactions} balance={balance} setWalletVerified={setWalletVerified} resetView={resetView}/>
             </div>
@@ -82,7 +93,6 @@ function MainPage(){
                 <GainLossReport walletTransactions={walletTransactions} exchangeTransactions={sellTransactions} mockData={reportData}/>
             </div>
         }
-        
       </>
      );
 }

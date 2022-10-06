@@ -27,7 +27,7 @@ const GainLossReportView = (props) => {
     return (
         <div className="align-items-center component-section">
             <Container>
-                <div className="p-5 my-4 rounded-5 bg-light" align="left">
+                <div className="p-5 my-4 rounded-5 bg-light info-table" align="left">
                     <h1>8949: Sales and Other Dispositions of Capital Assets</h1>
                     <div className='table-wrapper-scroll-y my-custom-scrollbar table-striped table-hover'>
                         <Table responsive size='sm'>

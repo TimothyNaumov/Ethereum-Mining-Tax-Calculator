@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Papa from 'papaparse';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap'
 import { ArrowDown } from 'react-bootstrap-icons';
+import {Link} from "react-router-dom";
 
 const UploadCSV = (props) => {
     const [file, setFile] = useState();
@@ -64,7 +65,7 @@ const UploadCSV = (props) => {
                     <h1>Upload Exchange Transactions</h1>
                 </Row>
                 <Row className="justify-content-md-center" align="center">
-                    <p className="lead">Your capital gain/loss is determined from the proceeds of your selling transactions. Upload a csv of your coinbase transactions to determine and identify your selling transactions. For more information click on help at the top</p>
+                    <p className="lead">Your capital gain/loss is determined from the Ethereum you sell. Upload a csv of your coinbase transactions to add your selling transactions. For more information click <a href ="/help" target="_blank">here</a></p>
                 </Row>
                 <Row className="justify-content-md-center" align="center">
                     <Form.Group className="mb-3">
