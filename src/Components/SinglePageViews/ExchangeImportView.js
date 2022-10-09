@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Papa from 'papaparse';
 import {Container, Row, Col, Form, Button} from 'react-bootstrap'
 import { ArrowDown } from 'react-bootstrap-icons';
-import {Link} from "react-router-dom";
+import { mockExchangeTransactions } from '../../Testing/MockReportValues';
 
 const UploadCSV = (props) => {
     const [file, setFile] = useState();
@@ -16,6 +16,13 @@ const UploadCSV = (props) => {
     }
 
     function onSubmit(e){
+        console.log("Trying to submit. Are we in demo? " + props.inDemo);
+        if(props.inDemo){
+            props.setSellTransactions(mockExchangeTransactions);
+            props.setCSVUploaded(true);
+            return;
+        }
+
         Papa.parse(file, {
             header: true,
             skipEmptyLines: true,
@@ -78,7 +85,6 @@ const UploadCSV = (props) => {
                     </Button>
                 </Row>
             </Container>
-            
         </div>
      );
 }

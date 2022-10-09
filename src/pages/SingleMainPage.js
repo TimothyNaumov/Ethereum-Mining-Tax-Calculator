@@ -20,6 +20,17 @@ function MainPage(){
     const [inDemo, setInDemo] = useState(false);
 
     const ref = useRef(null);
+    
+    function setDemoValues(e){
+        e.preventDefault();
+        if(!inDemo){
+            console.log("Going into demo");
+            setInDemo(true);
+            setAddress("TEST");
+            getWalletInfo();
+        }
+    }
+    
 
     function handleAddressChange(e){
         e.preventDefault();
@@ -39,6 +50,7 @@ function MainPage(){
     }
 
     async function getWalletInfo(){
+        console.log(address);
         try{
             const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${address}`);
             const importedWalletTransactions = walletTransactionResponse.data;
@@ -60,25 +72,25 @@ function MainPage(){
     }, [balance, walletVerified, CSVUploaded, generateReport])
 
     useEffect(() => {
-        if(inDemo){
-            setAddress("TEST");
+        if(address === "TEST"){
+            setInDemo(true);
             getWalletInfo();
         }
-    }, [inDemo])
+    }, [address])
     
 
     return (
       <>
         <NavigationBar/>
-        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress} setInDemo={setInDemo}/>
-        {(balance.usd || inDemo) && 
+        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress} setDemoValues={setDemoValues}/>
+        {(balance.usd) && 
             <div ref={ref}>
                 <WalletView address={address} walletTransactions={walletTransactions} balance={balance} setWalletVerified={setWalletVerified} resetView={resetView}/>
             </div>
         }
         {walletVerified && 
             <div ref={ref}>
-                <ExchangeImportView setCSVUploaded={setCSVUploaded} setSellTransactions={setSellTransactions}/>
+                <ExchangeImportView setCSVUploaded={setCSVUploaded} setSellTransactions={setSellTransactions} inDemo={inDemo}/>
             </div>
         }
         {

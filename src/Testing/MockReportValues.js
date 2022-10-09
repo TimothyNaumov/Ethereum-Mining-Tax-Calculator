@@ -1,4 +1,4 @@
-const reportData = [
+export const reportData = [
     {
         acquireDate: "08/09/2017",
         sellDate: "05/23/2018",
@@ -53,6 +53,51 @@ const reportData = [
         adjustment: 0.00,
         capitalGain: -0.56
     }
+]
+
+export const mockExchangeTransactions = [
+    {
+        sellingDate: "2021-01-15T24:00:00Z",
+        proceedsUSD: 1200,
+        proceedsETH: 1
+    },
+    {
+        sellingDate: "2021-02-10T24:00:00Z",
+        proceedsUSD: 600,
+        proceedsETH: 0.5
+    },
+    {
+        sellingDate: "2021-02-20T24:00:00Z",
+        proceedsUSD: 600,
+        proceedsETH: 0.5
+    },
+    {
+        sellingDate: "2021-03-15T24:00:00Z",
+        proceedsUSD: 600,
+        proceedsETH: 0.25
+    },
+    {
+        sellingDate: "2021-04-15T24:00:00Z",
+        proceedsUSD: 600,
+        proceedsETH: 0.75
+    },
+    {
+        sellingDate: "2021-04-25T24:00:00Z",
+        proceedsUSD: 600,
+        proceedsETH: .5
+    },
+    {
+        sellingDate: "2021-05-15T24:00:00Z",
+        proceedsUSD: 600,
+        proceedsETH: .75
+    },
+    {
+        sellingDate: "2021-06-15T24:00:00Z",
+        proceedsUSD: 600,
+        proceedsETH: 1
+    },
+    
+
 ]
 
 export default reportData;
