@@ -20,18 +20,8 @@ function MainPage(){
     const [inDemo, setInDemo] = useState(false);
 
     const ref = useRef(null);
+    const ADDRESS = inDemo ? "TEST" : address;
     
-    function setDemoValues(e){
-        e.preventDefault();
-        if(!inDemo){
-            console.log("Going into demo");
-            setInDemo(true);
-            setAddress("TEST");
-            getWalletInfo();
-        }
-    }
-    
-
     function handleAddressChange(e){
         e.preventDefault();
         setAddress(e.target.value);
@@ -50,16 +40,15 @@ function MainPage(){
     }
 
     async function getWalletInfo(){
-        console.log(address);
         try{
-            const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${address}`);
+            const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${ADDRESS}`);
             const importedWalletTransactions = walletTransactionResponse.data;
             setWalletTransactions(importedWalletTransactions);
         } catch(err){
             console.log(err);
         }
         try{
-            const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${address}`);
+            const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${ADDRESS}`);
             const balance = walletBalance.data;
             setBalance(balance);
         } catch(err){
@@ -72,20 +61,17 @@ function MainPage(){
     }, [balance, walletVerified, CSVUploaded, generateReport])
 
     useEffect(() => {
-        if(address === "TEST"){
-            setInDemo(true);
-            getWalletInfo();
-        }
-    }, [address])
+        getWalletInfo();
+        //eslint-disable-next-line
+    }, [inDemo])
     
-
     return (
       <>
         <NavigationBar/>
-        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress} setDemoValues={setDemoValues}/>
-        {(balance.usd) && 
+        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress} setDemo={setInDemo}/>
+        {!!balance.usd && 
             <div ref={ref}>
-                <WalletView address={address} walletTransactions={walletTransactions} balance={balance} setWalletVerified={setWalletVerified} resetView={resetView}/>
+                <WalletView address={ADDRESS} walletTransactions={walletTransactions} balance={balance} setWalletVerified={setWalletVerified} resetView={resetView}/>
             </div>
         }
         {walletVerified && 
@@ -110,3 +96,5 @@ function MainPage(){
 }
  
 export default MainPage;
+
+//setDemoValues={setDemoValues}

@@ -12,7 +12,7 @@ function NavigationBar() {
             <Navbar.Collapse>
                 <Nav>
                     <Nav.Link href="/"> Generate 8949 Form</Nav.Link>
-                    <Nav.Link href="/help"> Help </Nav.Link>
+                    <Nav.Link href="/help" target="_Blank"> Help </Nav.Link>
                     <Nav.Link> Privacy Policy </Nav.Link>
                     <Nav.Link> About</Nav.Link>
                 </Nav>

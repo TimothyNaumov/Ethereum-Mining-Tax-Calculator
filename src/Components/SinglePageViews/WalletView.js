@@ -16,10 +16,11 @@ function toHumanTime(epochTime){
 
 const Transaction = (props) => (
     <tr>
-        <td>{`${toHumanTime(props.timeStamp).toString()}`}</td>
-        <td>{props.from}</td>
-        <td>{props.to}</td>
-        <td>{`${toEther(props.value)} ETH`}</td>
+        <td>{`${toHumanTime(props.transaction.timeStamp).toString()}`}</td>
+        <td>{props.transaction.from}</td>
+        <td>{props.transaction.to}</td>
+        <td>{`${toEther(props.transaction.value)} ETH`}</td>
+        <td>{(props.transaction.usd * toEther(props.transaction.value)).toFixed(2)}</td>
     </tr>
 );
 
@@ -41,7 +42,8 @@ const WalletView = (props) => {
         
         return props.walletTransactions.map((transaction) => {
             return (
-                <Transaction hash={transaction.hash} timeStamp={transaction.timeStamp} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
+                // <Transaction hash={transaction.hash} timeStamp={transaction.timeStamp} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
+                <Transaction transaction={transaction}/>
             );
         });
     };
@@ -61,7 +63,8 @@ const WalletView = (props) => {
                                     <th>Date</th>
                                     <th>From</th>
                                     <th>To</th>
-                                    <th>Value</th>
+                                    <th>Value (ETH)</th>
+                                    <th>Value (USD)</th>
                                 </tr>
                             </thead>
                         <tbody>{transactionList()}</tbody>
