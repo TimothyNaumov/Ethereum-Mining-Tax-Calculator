@@ -73,12 +73,12 @@ export const mockExchangeTransactions = [
     },
     {
         sellingDate: "2021-03-15T24:00:00Z",
-        proceedsUSD: 600,
+        proceedsUSD: 300,
         proceedsETH: 0.25
     },
     {
         sellingDate: "2021-04-15T24:00:00Z",
-        proceedsUSD: 600,
+        proceedsUSD: 900,
         proceedsETH: 0.75
     },
     {
@@ -88,12 +88,12 @@ export const mockExchangeTransactions = [
     },
     {
         sellingDate: "2021-05-15T24:00:00Z",
-        proceedsUSD: 600,
+        proceedsUSD: 900,
         proceedsETH: .75
     },
     {
         sellingDate: "2021-06-15T24:00:00Z",
-        proceedsUSD: 600,
+        proceedsUSD: 1200,
         proceedsETH: 1
     },
     

@@ -3,13 +3,13 @@ import {Container, Table, Button } from 'react-bootstrap'
 
 const Transaction = (props) => (
     <tr>
-        <td>{props.acquireDate}</td>
-        <td>{props.sellDate}</td>
-        <td>{parseFloat(props.proceeds).toFixed(2)}</td>
-        <td>{parseFloat(props.costBasis).toFixed(2)}</td>
-        <td>{props.codes}</td>
-        <td>{parseFloat(props.adjustment).toFixed(2)}</td>
-        <td>{parseFloat(props.capitalGain).toFixed(2)}</td>
+        <td>{props.transaction.acquireDate}</td>
+        <td>{props.transaction.sellDate}</td>
+        <td>{parseFloat(props.transaction.proceeds).toFixed(2)}</td>
+        <td>{parseFloat(props.transaction.costBasis).toFixed(2)}</td>
+        <td>{props.transaction.codes}</td>
+        <td>{parseFloat(props.transaction.adjustment).toFixed(2)}</td>
+        <td>{parseFloat(props.transaction.capitalGain).toFixed(2)}</td>
     </tr>
 );
 
@@ -17,9 +17,7 @@ const GainLossReportView = (props) => {
     function transactionList(){
         return props.mockData.map((transaction) => {
             return (
-                //I feel like there's definitely a better way to be passing in these props with just one object such as...
-                //<Transaction props={transaction}/> but that didn't work for me
-                <Transaction acquireDate={transaction.acquireDate} sellDate={transaction.sellDate} costBasis={transaction.costBasis} proceeds={transaction.proceeds} adjustment={transaction.adjustment} capitalGain={transaction.capitalGain}/>
+                <Transaction transaction={transaction}/>
             );
         });
     };

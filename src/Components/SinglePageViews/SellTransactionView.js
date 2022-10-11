@@ -4,9 +4,9 @@ import { ArrowDown } from 'react-bootstrap-icons';
 
 const Transaction = (props) => (
     <tr>
-        <td>{props.sellingDate}</td>
-        <td>{parseFloat(props.proceedsUSD).toFixed(2)}</td>
-        <td>{parseFloat(props.proceedsETH).toFixed(5)}</td>
+        <td>{props.transaction.sellingDate}</td>
+        <td>{parseFloat(props.transaction.proceedsUSD).toFixed(2)}</td>
+        <td>{parseFloat(props.transaction.proceedsETH).toFixed(5)}</td>
     </tr>
 );
 
@@ -14,14 +14,14 @@ const sellTransactionView = (props) => {
     function transactionList(){
         return props.sellTransactions.map((transaction) => {
             return (
-                //I feel like there's definitely a better way to be passing in these props with just one object such as...
-                //<Transaction props={transaction}/> but that didn't work for me
-                <Transaction sellingDate={transaction.sellingDate} proceedsUSD={transaction.proceedsUSD} proceedsETH={transaction.proceedsETH}/>
+                <Transaction transaction={transaction}/>
             );
         });
     };
 
     function generateReport(){
+        
+
         props.setGenerateReport(true);
     }
 
