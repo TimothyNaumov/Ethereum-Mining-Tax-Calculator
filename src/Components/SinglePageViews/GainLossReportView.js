@@ -1,21 +1,23 @@
 import React from "react";
-import {Container, Table, Button } from 'react-bootstrap'
+import {Container, Table} from 'react-bootstrap'
+import { get8949 } from "../../CapitalGainLossCalculator";
 
 const Transaction = (props) => (
     <tr>
-        <td>{props.transaction.acquireDate}</td>
-        <td>{props.transaction.sellDate}</td>
-        <td>{parseFloat(props.transaction.proceeds).toFixed(2)}</td>
-        <td>{parseFloat(props.transaction.costBasis).toFixed(2)}</td>
+        <td>{props.transaction.AcquireDate}</td>
+        <td>{props.transaction.SellDate}</td>
+        <td>{parseFloat(props.transaction.Proceeds).toFixed(2)}</td>
+        <td>{parseFloat(props.transaction.CostBasis).toFixed(2)}</td>
         <td>{props.transaction.codes}</td>
-        <td>{parseFloat(props.transaction.adjustment).toFixed(2)}</td>
-        <td>{parseFloat(props.transaction.capitalGain).toFixed(2)}</td>
+        <td>{parseFloat(props.transaction.Adjustment).toFixed(2)}</td>
+        <td>{parseFloat(props.transaction.CapitalGainLoss).toFixed(2)}</td>
     </tr>
 );
 
 const GainLossReportView = (props) => {
     function transactionList(){
-        return props.mockData.map((transaction) => {
+        const report = get8949(props.walletTransactions, props.exchangeTransactions);
+        return report.map((transaction) => {
             return (
                 <Transaction transaction={transaction}/>
             );

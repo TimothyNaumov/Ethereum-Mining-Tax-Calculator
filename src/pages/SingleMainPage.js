@@ -17,6 +17,7 @@ function MainPage(){
     const [CSVUploaded, setCSVUploaded] = useState(false);
     const [sellTransactions, setSellTransactions] = useState([]);
     const [generateReport, setGenerateReport] = useState(false);
+    const [report, setReport] = useState();
     const [inDemo, setInDemo] = useState(false);
 
     const ref = useRef(null);
@@ -88,7 +89,7 @@ function MainPage(){
         {
             generateReport &&
             <div ref={ref}>
-                <GainLossReport walletTransactions={walletTransactions} exchangeTransactions={sellTransactions} mockData={reportData}/>
+                <GainLossReport walletTransactions={walletTransactions} exchangeTransactions={sellTransactions} mockData={reportData} setReport={setReport}/>
             </div>
         }
       </>

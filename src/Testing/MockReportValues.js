@@ -57,44 +57,52 @@ export const reportData = [
 
 export const mockExchangeTransactions = [
     {
-        sellingDate: "2021-01-15T24:00:00Z",
-        proceedsUSD: 1200,
-        proceedsETH: 1
+        "Date & time": "2021-01-15T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 1200,
+        "Quantity Disposed": 1,
     },
     {
-        sellingDate: "2021-02-10T24:00:00Z",
-        proceedsUSD: 600,
-        proceedsETH: 0.5
+        "Date & time": "2021-02-10T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 600,
+        "Quantity Disposed": 0.5
     },
     {
-        sellingDate: "2021-02-20T24:00:00Z",
-        proceedsUSD: 600,
-        proceedsETH: 0.5
+        "Date & time": "2021-02-20T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 600,
+        "Quantity Disposed": 0.5
     },
     {
-        sellingDate: "2021-03-15T24:00:00Z",
-        proceedsUSD: 300,
-        proceedsETH: 0.25
+        "Date & time": "2021-03-15T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 300,
+        "Quantity Disposed": 0.25
     },
     {
-        sellingDate: "2021-04-15T24:00:00Z",
-        proceedsUSD: 900,
-        proceedsETH: 0.75
+        "Date & time": "2021-04-15T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 900,
+        "Quantity Disposed": 0.75
     },
     {
-        sellingDate: "2021-04-25T24:00:00Z",
-        proceedsUSD: 600,
-        proceedsETH: .5
+        "Date & time": "2021-04-25T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 600,
+        "Quantity Disposed": .5
     },
     {
-        sellingDate: "2021-05-15T24:00:00Z",
-        proceedsUSD: 900,
-        proceedsETH: .75
+        "Date & time": "2021-05-15T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 900,
+        "Quantity Disposed": .75
     },
     {
-        sellingDate: "2021-06-15T24:00:00Z",
-        proceedsUSD: 1200,
-        proceedsETH: 1
+        "Date & time": "2021-06-15T24:00:00Z",
+        "Transaction Type": "Sell",
+        "Proceeds (excl. fees paid) (USD)": 1200,
+        "Quantity Disposed": 1
     },
     
 

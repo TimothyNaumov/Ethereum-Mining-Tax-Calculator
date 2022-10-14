@@ -4,9 +4,9 @@ import { ArrowDown } from 'react-bootstrap-icons';
 
 const Transaction = (props) => (
     <tr>
-        <td>{props.transaction.sellingDate}</td>
-        <td>{parseFloat(props.transaction.proceedsUSD).toFixed(2)}</td>
-        <td>{parseFloat(props.transaction.proceedsETH).toFixed(5)}</td>
+        <td>{props.transaction["Date & time"]}</td>
+        <td>{parseFloat(props.transaction["Proceeds (excl. fees paid) (USD)"]).toFixed(2)}</td>
+        <td>{parseFloat(props.transaction["Quantity Disposed"]).toFixed(5)}</td>
     </tr>
 );
 

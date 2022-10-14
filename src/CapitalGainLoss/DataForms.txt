@@ -1,0 +1,35 @@
+Income Transaction:
+{
+    {
+        "blockNumber": "11655188",
+        "timeStamp": "1610654014",
+        "hash": "0x574155fa6830dae4b447d5bd4dff2d63de47a05d3c80ea1993faf970592ef3c9",
+        "nonce": "30304160",
+        "blockHash": "0x86af17c3bef5421363e0a7bc762f78d831be1e6b7ed89a68122c121a52f364fe",
+        "transactionIndex": "15",
+        "from": "0xea674fdde714fd979de3edf0f56aa9716b898ec8",
+        "to": "0x750ca59270bdf16507ff977037a49a8cfb6f98b9",
+        "value": "12945624011589463",
+        "gas": "50000",
+        "gasPrice": "1000000000",
+        "isError": "0",
+        "txreceipt_status": "1",
+        "input": "0x",
+        "contractAddress": "",
+        "cumulativeGasUsed": "336000",
+        "gasUsed": "21000",
+        "confirmations": "4092815",
+        "methodId": "0x",
+        "functionName": "",
+        "usd": 1216.9147884634556
+    },
+}
+
+Exchange Transaction:
+{
+    {
+        sellingDate: "2021-01-15T24:00:00Z",
+        proceedsUSD: 1200,
+        proceedsETH: 1
+    }
+}

@@ -52,7 +52,7 @@ const ViewCapitalDifference = (props) => {
             });
             console.log(associativeArray);
             // * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
-            const incomeTransactionsFromWallet = walletTransactions.filter(element => element.from === "0x750ca59270bdf16507ff977037a49a8cfb6f98b9" && element.value != 0).map(element => (
+            const incomeTransactionsFromWallet = walletTransactions.filter(element => element.from === "0x750ca59270bdf16507ff977037a49a8cfb6f98b9" && element.value !== 0).map(element => (
                 {
                     epoch: element.timeStamp,
                     isoDate: new Date(element.timeStamp * 1000),
