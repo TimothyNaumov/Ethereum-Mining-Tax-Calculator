@@ -25,14 +25,18 @@ const getCleanIncomeTransactions = (incomeTransactions) => {
 }
 
 const getCleanExchangeTransactions = (exchangeTransactions) => {
+
+    //return exchangeTransactions;
     
-    return exchangeTransactions.filter(element => element["Transaction Type"] === "Sell").map(element => (
+    
+    return exchangeTransactions.map(element => (
         {
             Date: element["Date & time"],
             Proceeds: element["Proceeds (excl. fees paid) (USD)"],
             QuantityDisposed: element["Quantity Disposed"],
         }
     ));
+    
     
 }
 

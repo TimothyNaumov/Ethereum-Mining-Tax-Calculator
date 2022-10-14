@@ -6,15 +6,15 @@ const Transaction = (props) => {
     let acqDate = new Date(props.transaction.AcquireDate).toLocaleDateString();
     let sellDate = new Date(props.transaction.SellDate).toLocaleDateString();
     return(
-    <tr>
-        <td>{acqDate}</td>
-        <td>{sellDate}</td>
-        <td>{parseFloat(props.transaction.Proceeds).toFixed(2)}</td>
-        <td>{parseFloat(props.transaction.CostBasis).toFixed(2)}</td>
-        <td>{props.transaction.codes}</td>
-        <td>{parseFloat(props.transaction.Adjustment).toFixed(2)}</td>
-        <td>{parseFloat(props.transaction.CapitalGainLoss).toFixed(2)}</td>
-    </tr>
+        <tr>
+            <td>{acqDate}</td>
+            <td>{sellDate}</td>
+            <td>{parseFloat(props.transaction.Proceeds).toFixed(2)}</td>
+            <td>{parseFloat(props.transaction.CostBasis).toFixed(2)}</td>
+            <td>{props.transaction.codes}</td>
+            <td>{parseFloat(props.transaction.Adjustment).toFixed(2)}</td>
+            <td>{parseFloat(props.transaction.CapitalGainLoss).toFixed(2)}</td>
+        </tr>
     );
 };
 

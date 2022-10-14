@@ -33,3 +33,22 @@ Exchange Transaction:
         proceedsETH: 1
     }
 }
+
+Old System:
+{
+    epoch: element.timeStamp,
+    isoDate: new Date(element.timeStamp * 1000),
+    incomeInUSD: toEther(element.value) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)],
+    ether: toEther(element.value),
+    etherPriceOnIncomeDate: associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)],
+    TransactionFeeQuantity: toEther(element.gasPrice * element.gasUsed),
+    TransactionFeePrice: toEther(element.gasPrice * element.gasUsed) * associativeArray[(epochToEndOfDay(element.timeStamp) * 1000)]
+}
+
+Date: element["Date & time"],
+Type: element["Transaction Type"],
+Epoch: new Date(element["Date & time"]).getTime(),
+EpochAtEndOfDay: epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000),
+Proceeds: element["Proceeds (excl. fees paid) (USD)"],
+QuantityDisposed: element["Quantity Disposed"],
+EtherPriceOnSellDate: associativeArray[epochToEndOfDay(new Date(element["Date & time"]).getTime() / 1000) * 1000]

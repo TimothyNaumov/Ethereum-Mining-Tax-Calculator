@@ -41,9 +41,9 @@ const UploadCSV = (props) => {
                         const proceeds = Object.values(d)[9]
                         console.log(`transaction type is ${transactionType} with selling values of ${quantityDisposed} worth ${proceeds} USD`);
                         const sellTransaction = {
-                            sellingDate: transactionDate,
-                            proceedsUSD: proceeds,
-                            proceedsETH: quantityDisposed
+                            "Date & time": transactionDate,
+                            "Proceeds (excl. fees paid) (USD)": proceeds,
+                            "Quantity Disposed": quantityDisposed
                         };
                         sellingTransactions.push(sellTransaction);
                     }
