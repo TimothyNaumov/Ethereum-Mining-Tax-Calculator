@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useReducer } from "react";
 import axios from 'axios';
 import '../App.css';
 import WalletView from '../Components/SinglePageViews/WalletView';
@@ -8,6 +8,23 @@ import ExchangeImportView from "../Components/SinglePageViews/ExchangeImportView
 import SellTransactionView from "../Components/SinglePageViews/SellTransactionView";
 import GainLossReport from "../Components/SinglePageViews/GainLossReportView";
 import reportData from "../Testing/MockReportValues";
+
+const initialState = {
+    address: "",
+    balance: { eth: 0, usd: 0},
+    walletTransactions: [],
+    exchangeTransactions: [],
+    CapitalGainLossReport: []
+}
+
+function reducer(state, action){
+    console.log(`Dispatching ${action}`);
+    //DISPATCH TYPES
+    //1. AddressEntered
+    //2. WalletVerified
+    //3. ExchangeTransactionUploaded
+    //4. GenerateReport
+}
 
 function MainPage(){
     const [address, setAddress] = useState("");

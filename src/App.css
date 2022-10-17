@@ -117,13 +117,6 @@ bg-myRed{
 }
 
 /********************** Main Page Jumbo **********************/
-.jumbo-wrapper{
-  position: relative;
-  background: url(assets/gradient.jpg) no-repeat;
-  background-size: cover;
-  background-position: center;
-  height: 90vh;
-}
 
 .jumbo-info{
   display: flex;
