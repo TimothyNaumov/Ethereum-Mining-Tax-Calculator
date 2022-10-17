@@ -25,8 +25,6 @@ const getCleanIncomeTransactions = (incomeTransactions) => {
 }
 
 const getCleanExchangeTransactions = (exchangeTransactions) => {
-
-    //return exchangeTransactions;
     
     
     return exchangeTransactions.map(element => (

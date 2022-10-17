@@ -1,7 +1,17 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Container, Row, Form, Button} from 'react-bootstrap'
 const AddressInputView = (props) => {
+    const [address, setAddress] = useState("");
 
+    function handleAddressChange(e){
+        setAddress(e.target.value);
+    }
+
+    function handleKeyPress(target){
+        if(target.charCode === 13){
+            props.dispatch({type: 'AddressEntered', address: address});
+        }
+    }
     return (
     <div className="d-flex align-items-center component-section">
         <Container style={{width: "2000px"}}>
@@ -14,9 +24,9 @@ const AddressInputView = (props) => {
             </Row>
             <Row className="justify-content-md-center" align="center" style={{paddingTop: "25px"}}>
                 <div className='demo-button'>
-                    <Button style={{width: "75px", height: "60px"}} variant="outline-primary" onClick={() => props.setDemo(true)}>Try Demo</Button>
+                    <Button style={{width: "75px", height: "60px"}} variant="outline-primary" onClick={() => props.dispatch({type: 'EnterDemo'})}>Try Demo</Button>
                 </div>
-                <Form.Control style={{width: "900px", height: "60px"}} size="lg" type="text" placeholder="Let's start with your public Ethereum wallet address" onChange={props.handleAddressChange} onKeyPress={props.handleKeyPress}></Form.Control>
+                <Form.Control style={{width: "900px", height: "60px"}} size="lg" type="text" placeholder="Let's start with your public Ethereum wallet address" onChange={handleAddressChange} onKeyPress={handleKeyPress}></Form.Control>
             </Row>
         </Container>
     </div>

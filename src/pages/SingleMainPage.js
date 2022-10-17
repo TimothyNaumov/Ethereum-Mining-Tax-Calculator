@@ -10,20 +10,68 @@ import GainLossReport from "../Components/SinglePageViews/GainLossReportView";
 import reportData from "../Testing/MockReportValues";
 
 const initialState = {
+    walletVerified: false,
+    exchangeTransactionsUploaded: false,
+    shouldRenderReport: false,
     address: "",
     balance: { eth: 0, usd: 0},
     walletTransactions: [],
     exchangeTransactions: [],
-    CapitalGainLossReport: []
+    CapitalGainLossReport: [],
 }
 
-function reducer(state, action){
+async function reducer(state, action){
     console.log(`Dispatching ${action}`);
     //DISPATCH TYPES
-    //1. AddressEntered
-    //2. WalletVerified
-    //3. ExchangeTransactionUploaded
-    //4. GenerateReport
+    //1. EnterDemo
+    //2. AddressEntered
+    //3. WalletVerified
+    //4. ExchangeTransactionsUploaded
+    //5. GenerateReport
+
+    switch(action.type){
+        case "EnterDemo":
+            //On enter demo, change address to TEST and let getWalletInfo fetch demo data
+            state.address = "TEST";
+            await getWalletInfo(state);
+            return {...state};
+        case "AddressEntered":
+            //Set address in state to user wallet address and use getWalletInfo to fetch wallet balance
+            //and wallet transactions
+            state.address(action.address);
+            await getWalletInfo(state);
+            return {...state};
+        case "WalletVerified":
+            //Set walletVerified to true and update state
+            state.walletVerified = true;
+            return {...state};
+        case "ExchangeTransactionsUploaded":
+            //set ExchangeTransactions to true and update state
+            state.exchangeTransactionsUploaded = true;
+            return {...state};
+        case "GenerateReport":
+            //Call function to set CapitalGainLossReport attribute in state to report value
+            //Actually, I think the component should handle that, I should just validate to render component
+            state.shouldRenderReport = true;
+            return {...state};
+    }
+}
+
+async function getWalletInfo(state){
+    try{
+        const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${state.address}`);
+        const importedWalletTransactions = walletTransactionResponse.data;
+        state.walletTransactions = importedWalletTransactions;
+    } catch(err){
+        console.log(err);
+    }
+    try{
+        const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${state.address}`);
+        const balance = walletBalance.data;
+        state.balance = balance;
+    } catch(err){
+        console.log(err);
+    }
 }
 
 function MainPage(){
@@ -36,6 +84,8 @@ function MainPage(){
     const [generateReport, setGenerateReport] = useState(false);
     const [report, setReport] = useState();
     const [inDemo, setInDemo] = useState(false);
+
+    const [state, dispatch] = useReducer(reducer, initialState);
 
     const ref = useRef(null);
     const ADDRESS = inDemo ? "TEST" : address;
@@ -57,22 +107,7 @@ function MainPage(){
         }
     }
 
-    async function getWalletInfo(){
-        try{
-            const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${ADDRESS}`);
-            const importedWalletTransactions = walletTransactionResponse.data;
-            setWalletTransactions(importedWalletTransactions);
-        } catch(err){
-            console.log(err);
-        }
-        try{
-            const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${ADDRESS}`);
-            const balance = walletBalance.data;
-            setBalance(balance);
-        } catch(err){
-            console.log(err);
-        }
-    }
+    
 
     useEffect(() => {
         ref.current?.scrollIntoView({behavior: 'smooth'});
@@ -86,8 +121,8 @@ function MainPage(){
     return (
       <>
         <NavigationBar/>
-        <AddressInputView handleAddressChange={handleAddressChange} handleKeyPress={handleKeyPress} setDemo={setInDemo}/>
-        {!!balance.usd && 
+        <AddressInputView dispatch={dispatch}/>
+        {!!state.balance.usd && 
             <div ref={ref}>
                 <WalletView address={ADDRESS} walletTransactions={walletTransactions} balance={balance} setWalletVerified={setWalletVerified} resetView={resetView}/>
             </div>
