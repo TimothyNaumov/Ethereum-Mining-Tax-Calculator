@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Container, Table, Button } from 'react-bootstrap'
 
 function toEther(wei){
@@ -25,36 +25,29 @@ const Transaction = (props) => (
 );
 
 const WalletView = (props) => {
-
-    function clickedYes(){
-        console.log("You are ready to proceed");
-        props.setWalletVerified(true);
-    }
-
-    function clickedNo(){
-        console.log("You are not ready to proceed");
-        props.resetView();
-    }
     
 
     function transactionList(){
         //console.log(`Transactions is ${props.walletTransactions}`);
+
+        console.log(props);
         
-        return props.walletTransactions.map((transaction) => {
+        return props.state.walletTransactions.map((transaction) => {
             return (
                 // <Transaction hash={transaction.hash} timeStamp={transaction.timeStamp} from={transaction.from} to={transaction.to} value={transaction.value} key={transaction.hash}/>
                 <Transaction transaction={transaction}/>
             );
         });
     };
+    
 
     return (
         <div className="align-items-center component-section">
             <Container>
                 <div className="p-5 my-4 rounded-5 bg-light info-table" align="left">
-                    <h1>{props.address}</h1>
-                    <h4>{toEther(props.balance.wei)}  ETH</h4>
-                    <h4>$ {props.balance.usd}</h4>
+                    <h1>{props.state.address}</h1>
+                    <h4>{toEther(props.state.balance.wei)} ETH</h4>
+                    <h4>$ {props.state.balance.usd}</h4>
                     
                     <div className='table-wrapper-scroll-y my-custom-scrollbar table-striped table-hover'>
                         <Table responsive size='sm'>
@@ -75,10 +68,10 @@ const WalletView = (props) => {
                             <h2>Is this your wallet?</h2>
                         </div>
                         <div className="confirmationtextElement">
-                            <Button variant="outline-success" size="lg" onClick={clickedYes}>Yes</Button>{' '}
+                            <Button variant="outline-success" size="lg" onClick={() => props.dispatch({type: "WalletVerified"})}>Yes</Button>{' '}
                         </div>
                         <div className="confirmationtextElement">
-                            <Button variant="outline-danger" size="lg" onClick={clickedNo}>No</Button>{' '}
+                            <Button variant="outline-danger" size="lg" onClick={() => props.dispatch({type: "ResetView"})}>No</Button>{' '}
                         </div>
                     </div>
                 </div>
