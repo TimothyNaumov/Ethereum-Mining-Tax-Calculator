@@ -1,6 +1,6 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {Container, Table} from 'react-bootstrap'
-import { get8949 } from "../../CapitalGainLossCalculator";
+import { get8949, getColumnTotals } from "../../CapitalGainLossCalculator";
 
 const Transaction = (props) => {
     let acqDate = new Date(props.transaction.AcquireDate).toLocaleDateString();
@@ -18,16 +18,50 @@ const Transaction = (props) => {
     );
 };
 
+const TotalRow = (props) => {
+    console.log(JSON.stringify(props.totals));
+    return(
+        <tr>
+            <td><strong>Totals: </strong></td>
+            <td><strong>N/A</strong></td>
+            <td><strong>{(props.totals.totalProceeds).toFixed(2)}</strong></td>
+            <td><strong>{(props.totals.totalCostBasis).toFixed(2)}</strong></td>
+            <td><strong>N/A</strong></td>
+            <td><strong>{(props.totals.totalAdjustment).toFixed(2)}</strong></td>
+            <td><strong>{(props.totals.totalGainLoss).toFixed(2)}</strong></td>
+        </tr>
+
+    );
+};
+
+// const ColumnTotals = (totals) => {
+//     return (
+//         <div className="d-flex" style={{paddingTop: "50px"}}>
+//             <h4>Total:</h4>
+//         </div>
+//     );
+// }
+
 const GainLossReportView = (props) => {
-    function transactionList(){
-        const report = get8949(props.walletTransactions, props.exchangeTransactions);
-        return report.map((transaction) => {
+    const [gainLossReport, setGainLossReport] = useState([]);
+    //const [total, setTotal] = useState({});
+
+    function generateReport(){
+        const report = get8949(props.state.walletTransactions, props.state.exchangeTransactions);
+        const transactionList = report.map((transaction) => {
             return (
                 <Transaction transaction={transaction}/>
             );
         });
+        const totals = getColumnTotals(report);
+        transactionList.push(<TotalRow totals={totals}/>);
+        setGainLossReport(transactionList);
     };
 
+    useEffect(() => {
+        generateReport();
+    }, [])
+    
     return (
         <div className="align-items-center component-section">
             <Container>
@@ -46,9 +80,12 @@ const GainLossReportView = (props) => {
                                     <th>(h) Gain or (loss)</th>
                                 </tr>
                             </thead>
-                        <tbody>{transactionList()}</tbody>
+                        <tbody>{gainLossReport}</tbody>
                         </Table>
                     </div>
+                    {/* {total.totalProceeds && 
+                        <ColumnTotals report={total}/>
+                    } */}
                 </div>
             </Container>
         </div>

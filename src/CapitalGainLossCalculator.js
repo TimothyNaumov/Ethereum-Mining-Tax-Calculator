@@ -5,6 +5,26 @@ export const get8949 = (incomeTransactions, exchangeTransactions) => {
     return report;
 };
 
+export const getColumnTotals = (reportRows) => {
+    let columnTotals = {
+        totalProceeds: 0,
+        totalCostBasis: 0,
+        totalAdjustment: 0,
+        totalGainLoss: 0
+    }
+
+    console.log(reportRows);
+
+    reportRows.forEach(row => {
+        columnTotals.totalProceeds += parseInt(row.Proceeds);
+        columnTotals.totalCostBasis += parseInt(row.CostBasis);
+        columnTotals.totalAdjustment += parseInt(row.Adjustment);
+        columnTotals.totalGainLoss += parseInt(row.CapitalGainLoss);
+    });
+
+    return columnTotals;
+}
+
 function toEther(wei){
     return  wei / Math.pow(10, 18);
 }
@@ -91,7 +111,7 @@ const generateGainLossTransactions = function(costBasis, sellingTransactions){
 
             currentReportTransaction.Adjustment = adjustment;
 
-            console.log(`Iterations: ${iterations} \n costBasis was ${costBasisValue} with current ethereum split of ${currentEthereumSold}. There is ${remainingEthSold} ethereum remaining to parse`)
+            //console.log(`Iterations: ${iterations} \n costBasis was ${costBasisValue} with current ethereum split of ${currentEthereumSold}. There is ${remainingEthSold} ethereum remaining to parse`)
 
             capitalGainLossReport.push(currentReportTransaction);
 
@@ -100,14 +120,6 @@ const generateGainLossTransactions = function(costBasis, sellingTransactions){
             }
         }
     }
-
-    const initialValue = 0;
-    const sumWithInital = capitalGainLossReport.reduce(
-        (previousValue, currentValue) => previousValue + parseInt(currentValue.CapitalGainLoss),
-        initialValue
-    );
-
-    console.log("Calculated Sum of Proceeds is " + sumWithInital);
 
     return capitalGainLossReport;
 }

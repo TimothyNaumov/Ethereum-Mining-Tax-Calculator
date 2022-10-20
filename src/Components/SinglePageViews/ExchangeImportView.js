@@ -5,21 +5,15 @@ import { ArrowDown } from 'react-bootstrap-icons';
 import { mockExchangeTransactions } from '../../Testing/MockReportValues';
 
 const UploadCSV = (props) => {
-    const [file, setFile] = useState();
-    const [parsedData, setParsedData] = useState([]);
-    const [tableRows, setTableRows] = useState([]);
-    const [values, setValues] = useState([]);
-    const [sellValueUSD, setSellValueUSD] = useState([]);
+     const [file, setFile] = useState();
 
     function onChange(e){
         setFile(e.target.files[0]);
     }
 
     function onSubmit(e){
-        console.log("Trying to submit. Are we in demo? " + props.inDemo);
-        if(props.inDemo){
-            props.setSellTransactions(mockExchangeTransactions);
-            props.setCSVUploaded(true);
+        if(props.state.address==="TEST"){
+            props.dispatch({type: "ExchangeTransactionsUploaded", exchangeTransactions: mockExchangeTransactions});
             return;
         }
 
@@ -49,18 +43,9 @@ const UploadCSV = (props) => {
                     }
                 });
 
-                setParsedData(results.data);
-
-                setTableRows(rowsArray[0]);
-
-                setValues(valuesArray);
-
-                setSellValueUSD(sellingTransactions);
-
-                props.setSellTransactions(sellingTransactions);
+                props.dispatch({type: "ExchangeTransactionsUploaded", exchangeTransactions: sellingTransactions});
             },
         });
-        props.setCSVUploaded(true);
     };
 
 
@@ -90,5 +75,3 @@ const UploadCSV = (props) => {
 }
 
 export default UploadCSV;
-
-//<input className="form-control" type="file" id="csvFileInput" accept={".csv"} onChange={onChange}></input>

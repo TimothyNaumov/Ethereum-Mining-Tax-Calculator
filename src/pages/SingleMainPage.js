@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useReducer } from "react";
+import React, {useRef, useEffect, useReducer } from "react";
 import axios from 'axios';
 import '../App.css';
 import WalletView from '../Components/SinglePageViews/WalletView';
@@ -7,7 +7,6 @@ import NavigationBar from "../Components/NavigationBar";
 import ExchangeImportView from "../Components/SinglePageViews/ExchangeImportView";
 import SellTransactionView from "../Components/SinglePageViews/SellTransactionView";
 import GainLossReport from "../Components/SinglePageViews/GainLossReportView";
-import reportData from "../Testing/MockReportValues";
 
 const initialState = {
     shouldRenderWallet: false,
@@ -35,19 +34,19 @@ function reducer(state, action){
     switch(action.type){
         case "EnterDemo":
             //On enter demo, change address to TEST and let getWalletInfo fetch demo data
-            return {...state, address: "TEST", shouldRenderWallet: true};
+            return {...state, address: "TEST"};
         case "ResetView":
             return initialState;
         case "AddressEntered":
             //Set address in state to user wallet address and use getWalletInfo to fetch wallet balance
             //and wallet transactions
-            return {...state, address: action.address, shouldRenderWallet: true};
+            return {...state, address: action.address};
         case "WalletVerified":
             //Set walletVerified to true and update state
             return {...state, shouldRenderExchangeUpload: true};
         case "ExchangeTransactionsUploaded":
             //set ExchangeTransactions to true and update state
-            return {...state, exchangeTransactions: true};
+            return {...state, exchangeTransactions: action.exchangeTransactions, shouldRenderExchangeTransactions: true};
         case "GenerateReport":
             //Call function to set CapitalGainLossReport attribute in state to report value
             //Actually, I think the component should handle that, I should just validate to render component
@@ -58,100 +57,65 @@ function reducer(state, action){
 }
 
 function MainPage(){
-    //const [address, setAddress] = useState("");
-    // const [balance, setBalance] = useState({ eth: 0, usd: 0});
-    // const [walletTransactions, setWalletTransactions] = useState([]);
-    // const [walletVerified, setWalletVerified] = useState(false);
-    // const [CSVUploaded, setCSVUploaded] = useState(false);
-    // const [sellTransactions, setSellTransactions] = useState([]);
-    // const [generateReport, setGenerateReport] = useState(false);
-    // const [report, setReport] = useState();
-    // const [inDemo, setInDemo] = useState(false);
 
     const [state, dispatch] = useReducer(reducer, initialState);
 
     const ref = useRef(null);
-    //const ADDRESS = inDemo ? "TEST" : address;
-    
-    // function handleAddressChange(e){
-    //     e.preventDefault();
-    //     setAddress(e.target.value);
-    // }
-
-    // function resetView(){
-    //     setAddress("");
-    //     setBalance({ eth: 0, usd: 0});
-    //     setWalletTransactions([]);
-    // }
-
-    // async function handleKeyPress(target){
-    //     if(target.charCode === 13){
-    //         getWalletInfo();
-    //     }
-    // }
-
-    async function getWalletInfo(){
-        try{
-            const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${state.address}`);
-            const importedWalletTransactions = walletTransactionResponse.data;
-            state.walletTransactions = importedWalletTransactions;
-        } catch(err){
-            console.log(err);
-        }
-        try{
-            const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${state.address}`);
-            const balance = walletBalance.data;
-            state.balance = balance;
-        } catch(err){
-            console.log(err);
-        }
-    }
 
     useEffect(() => {
+        console.log("Change detected in address");
+
+        const getWalletInfo = async () => {
+            try{
+                const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${state.address}`);
+                const importedWalletTransactions = walletTransactionResponse.data;
+                state.walletTransactions = importedWalletTransactions;
+            } catch(err){
+                console.log(err);
+            }
+            try{
+                const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${state.address}`);
+                const balance = walletBalance.data;
+                state.balance = balance;
+                state.shouldRenderWallet = true;
+            } catch(err){
+                console.log(err);
+            }
+        }
         getWalletInfo();
         //eslint-disable-next-line
     }, [state.address])
-    
 
-    // useEffect(() => {
-    //     ref.current?.scrollIntoView({behavior: 'smooth'});
-    // }, [balance, walletVerified, CSVUploaded, generateReport])
-
-    // useEffect(() => {
-    //     getWalletInfo();
-    //     //eslint-disable-next-line
-    // }, [inDemo])
+     useEffect(() => {
+         ref.current?.scrollIntoView({behavior: 'smooth'});
+    }, [state.shouldRenderWallet, state.shouldRenderExchangeUpload, state.shouldRenderExchangeTransactions, state.shouldRenderReport])
     
     return (
       <>
         <NavigationBar/>
         <AddressInputView dispatch={dispatch}/>
-        {state.shouldRenderWallet && 
+        { state.shouldRenderWallet && 
             <div ref={ref}>
                 <WalletView dispatch={dispatch} state={state}/>
             </div>
         }
-        {/*walletVerified && 
+        { state.shouldRenderExchangeUpload && 
             <div ref={ref}>
-                <ExchangeImportView setCSVUploaded={setCSVUploaded} setSellTransactions={setSellTransactions} inDemo={inDemo}/>
+                <ExchangeImportView state={state} dispatch={dispatch}/>
             </div>
         }
-        {
-            CSVUploaded && 
+        { state.shouldRenderExchangeTransactions && 
             <div ref={ref}>
-                <SellTransactionView sellTransactions={sellTransactions} setGenerateReport={setGenerateReport}/>
+                <SellTransactionView state={state} dispatch={dispatch}/>
             </div>
         }
-        {
-            generateReport &&
+        { state.shouldRenderReport &&
             <div ref={ref}>
-                <GainLossReport walletTransactions={walletTransactions} exchangeTransactions={sellTransactions} mockData={reportData} setReport={setReport}/>
+                <GainLossReport state={state}/>
             </div>
-        } */}
+        }
       </>
      );
 }
  
 export default MainPage;
-
-//setDemoValues={setDemoValues}

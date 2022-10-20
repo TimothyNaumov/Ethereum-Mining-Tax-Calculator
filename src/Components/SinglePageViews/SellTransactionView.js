@@ -1,6 +1,5 @@
 import React from "react";
 import {Container, Table, Button } from 'react-bootstrap'
-import { ArrowDown } from 'react-bootstrap-icons';
 
 const Transaction = (props) => (
     <tr>
@@ -12,18 +11,12 @@ const Transaction = (props) => (
 
 const sellTransactionView = (props) => {
     function transactionList(){
-        return props.sellTransactions.map((transaction) => {
+        return props.state.exchangeTransactions.map((transaction) => {
             return (
                 <Transaction transaction={transaction}/>
             );
         });
     };
-
-    function generateReport(){
-        
-
-        props.setGenerateReport(true);
-    }
 
     return (
         <div className="align-items-center component-section">
@@ -44,7 +37,7 @@ const sellTransactionView = (props) => {
                     </div>
                     <div className="align-items-center confirmation-container">
                         <div className="confirmationtextElement">
-                            <Button variant="outline-success" size="lg" onClick={generateReport}>
+                            <Button variant="outline-success" size="lg" onClick={() => props.dispatch({type: "GenerateReport"})}>
                                 <h2>Generate Capital Gain/Loss Report</h2>
                             </Button>
                         </div>
