@@ -35,6 +35,8 @@ function reducer(state, action){
         case "EnterDemo":
             //On enter demo, change address to TEST and let getWalletInfo fetch demo data
             return {...state, address: "TEST"};
+        case "WalletInfoUpdated":
+            return {...state, walletTransactions: action.payload.transactions, balance: action.payload.balance, shouldRenderWallet: true}
         case "ResetView":
             return initialState;
         case "AddressEntered":
@@ -66,21 +68,18 @@ function MainPage(){
         console.log("Change detected in address");
 
         const getWalletInfo = async () => {
-            try{
-                const walletTransactionResponse = await axios.get(`http://localhost:4000/wallet/transactions/${state.address}`);
-                const importedWalletTransactions = walletTransactionResponse.data;
-                state.walletTransactions = importedWalletTransactions;
-            } catch(err){
-                console.log(err);
-            }
-            try{
-                const walletBalance = await axios.get(`http://localhost:4000/wallet/balance/${state.address}`);
-                const balance = walletBalance.data;
-                state.balance = balance;
-                state.shouldRenderWallet = true;
-            } catch(err){
-                console.log(err);
-            }
+            Promise.all([
+                axios.get(`http://localhost:4000/wallet/transactions/${state.address}`),
+                axios.get(`http://localhost:4000/wallet/balance/${state.address}`)
+            ]).then(([transactionResponse, balanceResponse]) => {
+                dispatch({
+                    type: "WalletInfoUpdated",
+                    payload: {
+                        transactions: transactionResponse.data,
+                        balance: balanceResponse.data
+                    }
+                })
+            });
         }
         getWalletInfo();
         //eslint-disable-next-line

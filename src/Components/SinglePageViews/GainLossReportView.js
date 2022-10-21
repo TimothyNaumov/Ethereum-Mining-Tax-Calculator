@@ -83,9 +83,6 @@ const GainLossReportView = (props) => {
                         <tbody>{gainLossReport}</tbody>
                         </Table>
                     </div>
-                    {/* {total.totalProceeds && 
-                        <ColumnTotals report={total}/>
-                    } */}
                 </div>
             </Container>
         </div>
