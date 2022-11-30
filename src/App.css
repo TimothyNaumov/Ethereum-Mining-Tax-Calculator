@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;800&display=swap');
 
+
 * {
   font-size: 100%;
   font-family: Poppins;
@@ -197,4 +198,67 @@ bg-myRed{
 
 .info-table{
   box-shadow: 0 0px 60px 15px rgba(100, 100, 100, 0.2);
+}
+
+/*************************** Help ****************************/
+.privacy-policy-text{
+  font-size: 20px;
+}
+
+/*WAVES*/
+.wave{
+  aspect-ratio: 16/9;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.topwavelayer1{
+  background-image: url('./assets/bluebackground.jpg');
+}
+
+.botwavelayer1{
+  background-image: url('./assets/bottomwave.svg');
+}
+
+.curve{
+  position: absolute;
+  height: 255px;
+  width: 100%;
+  bottom: 0;
+}
+
+.curve::before{
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 55%;
+  height: 100%;
+  transform: translate(85%, 60%);
+}
+
+.curve::after{
+  content: '';
+  display: block;
+  position: absolute;
+  border-radius: 100% 50%;
+  width: 55%;
+  height: 100%;
+  transform: translate(-4%, 40%);
+  z-index: -1;
+}
+
+.about-section-paragraph{
+  padding: 15px 0px 15px 0px;
+}
+
+.about-section-illustration{
+  width: 400px
+}
+
+li{
+  padding-top: 10px;
+  font-size: 20px;
 }

@@ -8,6 +8,8 @@ import ExchangeImportView from "../Components/SinglePageViews/ExchangeImportView
 import SellTransactionView from "../Components/SinglePageViews/SellTransactionView";
 import GainLossReport from "../Components/SinglePageViews/GainLossReportView";
 
+const PROD = true;
+
 const initialState = {
     shouldRenderWallet: false,
     shouldRenderExchangeUpload: false,
@@ -68,9 +70,10 @@ function MainPage(){
         console.log("Change detected in address");
 
         const getWalletInfo = async () => {
+            let domain = PROD ? 'http://www.ethminingtax.com' : 'http://localhost:4000';
             Promise.all([
-                axios.get(`http://localhost:4000/wallet/transactions/${state.address}`),
-                axios.get(`http://localhost:4000/wallet/balance/${state.address}`)
+                axios.get(`${domain}/wallet/transactions/${state.address}`),
+                axios.get(`${domain}/wallet/balance/${state.address}`)
             ]).then(([transactionResponse, balanceResponse]) => {
                 dispatch({
                     type: "WalletInfoUpdated",

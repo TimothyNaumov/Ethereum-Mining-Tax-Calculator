@@ -1,7 +1,8 @@
 import React from 'react';
 import SingleMainPage from './pages/SingleMainPage';
 import HelpPage from './pages/Help/HelpPage';
-import {render} from "react-dom"
+import PrivacyPolicyPage from './pages/PrivacyPolicyPage';
+import About from './pages/About';
 import {
     BrowserRouter,
     Routes,
@@ -14,6 +15,8 @@ function AppRouter(){
             <Routes>
                 <Route path="/" element={<SingleMainPage/>}/>
                 <Route path="/help" element={<HelpPage/>}/>
+                <Route path="/privacy" element={<PrivacyPolicyPage/>}/>
+                <Route path="/about" element={<About/>}/>
             </Routes>
         </BrowserRouter>
     )
