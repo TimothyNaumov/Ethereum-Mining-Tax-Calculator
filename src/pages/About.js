@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react'
 import NavigationBar from '../Components/NavigationBar'
 import {Container, Row, Col} from 'react-bootstrap';
-import calc from '../assets/calcImage.svg';
-import challenges from '../assets/thoughtprocess.svg'
-import eth from '../assets/ether.svg';
-import devImage from '../assets/devImage.svg';
-import reactImage from '../assets/reactImage.svg';
+import challenges from '../assets/AboutPageImages/thoughtprocess.svg'
+import eth from '../assets/AboutPageImages/ether.svg';
+import devImage from '../assets/AboutPageImages/devImage.svg';
 
 const About = () => {
     useEffect(() => {
