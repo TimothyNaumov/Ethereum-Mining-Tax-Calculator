@@ -151,23 +151,22 @@ bg-myRed{
 }
 
 /*************************** Help ****************************/
-.help-title-banner{
-  background-color: #e4e4e4;
-  height: 100%;
-}
-
 .help-title-text{
-  font-size: 50px;
+  font-size: 100px;
   font-weight: 800;
 }
 
-.help-content-container{
-  background-color: #f3f3f3;
+.help-option-card{
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+cursor: pointer;
 }
 
-.help-content-text{
-  font-size: 15px;
-  font-weight: 400;
+.help-option-card:hover{
+  transform: scale(1.05);
+box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
 }
 
 .dropdown-item a{
@@ -200,20 +199,6 @@ bg-myRed{
   box-shadow: 0 0px 60px 15px rgba(100, 100, 100, 0.2);
 }
 
-/*************************** Help ****************************/
-.privacy-policy-text{
-  font-size: 20px;
-}
-
-.about-section-paragraph{
-  padding: 15px 0px 15px 0px;
-}
-
 .about-section-illustration{
-  width: 400px
-}
-
-li{
-  padding-top: 10px;
-  font-size: 20px;
+  width: 500px;
 }

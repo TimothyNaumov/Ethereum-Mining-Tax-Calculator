@@ -54,7 +54,7 @@ const About = () => {
                         </ul>
                     </Col>
                     <Col xs lg="5">
-                        <img width={"600"} src={challenges} alt="secure computer"/>
+                        <img className='about-section-illustration' src={challenges} alt="secure computer"/>
                     </Col>
                 </Row>
             </Container>
@@ -71,28 +71,12 @@ const About = () => {
                         <h4 className='about-section-paragraph'>My name is Timothy Naumov</h4>
                         <h4 className='about-section-paragraph'>I am a student at the University of Texas at Dallas studying Software Engineering with an application domain in Information Assurance and Networking</h4>
                         <h4 className='about-section-paragraph'>I am passionate about learning new technology and spend my free time building web apps like the one you're looking at now!</h4>
-                        <h4>Add me on LinkedIn to keep up with what I've been working on</h4>
+                        <h4>Add me on <a href='https://www.linkedin.com/in/timothy-naumov/'>LinkedIn</a> to keep up with what I've been working on</h4>
                     </Col>
                 </Row>
                 <Row className="justify-content-md-center" align="center">
                 
                 </Row>
-            </Container>
-        </div>
-        <div className="d-flex align-items-center">
-            <Container fluid>
-                <div
-                        className="badge-base LI-profile-badge"
-                        data-locale="en_US"
-                        data-size="medium"
-                        data-theme="light"
-                        data-type="VERTICAL"
-                    >              
-                    <a
-                        className="badge-base_link LI-simple-link"
-                        href="https://www.linkedin.com/in/timothy-naumov?trk=profile-badge"
-                    />
-                </div> 
             </Container>
         </div>
     </>

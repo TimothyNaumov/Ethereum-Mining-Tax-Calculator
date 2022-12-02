@@ -1,14 +1,33 @@
 import React from 'react'
-import { Container, Row, Col } from 'react-bootstrap';
-import NavigationBar from '../../Components/NavigationBar';
+import NavigationBar from '../Components/NavigationBar';
+import {Container, Row, Col} from 'react-bootstrap';
+import HealthOptionCard from '../Components/Help/HelpOptionCard';
 
 
 const HelpPage = () => {
   return (
     <div>
         <NavigationBar/>
-        <div className='d-flex flex-column p-2 help-title-banner'>
-            <h1 className='help-title-text'>How to download your exchange transactions</h1>
+        <div className="d-flex align-items-center" style={{height: "100%"}}>
+            <Container>
+                <Row className='align-items-center' align="center">
+                    <h1 className='help-title-text'>Help</h1>
+                </Row>
+                <Row className='d-flex justify-content-center'>
+                    <HealthOptionCard title="Exchange Transactions"/>
+                    <HealthOptionCard title="Wallet Import"/>
+                    <HealthOptionCard title="Contact Us"/>
+                </Row>
+            </Container>
+        </div>
+    </div>
+  );
+}
+
+export default HelpPage
+
+/*
+<h1 className='help-title-text'>How to download your exchange transactions</h1>
             <ol type = "1" style={{fontSize: "30px"}}>
                 <li><a href="https://help.coinbase.com/en/coinbase/taxes-reports-and-financial-services/reports/transaction-report" target="_blank" rel="noreferrer">Official Coinbase instructions</a></li>
                 <li>Find your "Raw transactions report (CSV)" under tax documents</li>
@@ -19,15 +38,10 @@ const HelpPage = () => {
                 <li>If you own Ethereum, you have a public Ethereum wallet address used to find information about your transactions and wallet balance</li>
                 <li>It should look something like this: 0x00000000219ab540356cBB839Cbe05303d7705Fa</li>
             </ul>
-        </div>
-        
-    </div>
-  );
-}
 
-export default HelpPage
 
-/*
+
+
 <Container>
     <div className='bg-light'>
         <h1 style={{fontSize: "75px"}}>How to link your Ethereum Wallet</h1>
