@@ -205,13 +205,24 @@ bg-myRed{
   font-size: 20px;
 }
 
+
+
+/*************************** About ****************************/
+
+.about-section-title{
+  font-size: 48px;
+  font-weight: 600;
+}
+
 .about-section-paragraph{
   padding: 15px 0px 15px 0px;
 }
 
 .about-section-illustration{
-  width: 400px
+  width: 450px
 }
+
+
 
 li{
   padding-top: 10px;
