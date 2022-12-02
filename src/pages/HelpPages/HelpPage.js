@@ -1,7 +1,7 @@
 import React from 'react'
-import NavigationBar from '../Components/NavigationBar';
+import NavigationBar from '../../Components/NavigationBar';
 import {Container, Row, Col} from 'react-bootstrap';
-import HealthOptionCard from '../Components/Help/HelpOptionCard';
+import HealthOptionCard from '../../Components/Help/HelpOptionCard';
 
 
 const HelpPage = () => {
@@ -14,9 +14,9 @@ const HelpPage = () => {
                     <h1 className='help-title-text'>Help</h1>
                 </Row>
                 <Row className='d-flex justify-content-center'>
-                    <HealthOptionCard title="Exchange Transactions"/>
-                    <HealthOptionCard title="Wallet Import"/>
-                    <HealthOptionCard title="Contact Us"/>
+                    <HealthOptionCard title="Upload Exchange Transactions" to="/help/exchangetransactions"/>
+                    <HealthOptionCard title="Select Income Transactions" to="/help/importwallet"/>
+                    <HealthOptionCard title="Contact Us" to="/help/contact"/>
                 </Row>
             </Container>
         </div>

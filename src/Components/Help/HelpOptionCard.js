@@ -4,9 +4,9 @@ import Card from 'react-bootstrap/Card';
 const HelpOptionCard = (props) => {
   return (
     <Card style={{ width: '18rem', height: '5rem'}} className='mx-5 my-5 help-option-card'>
-      <Card.Body className='d-flex justify-content-center align-items-center stretched-link text-decoration-none' href='/'>
+      <Card.Body className='d-flex justify-content-center align-items-center' href='www.google.com'>
         <Card.Title style={{textAlign: "center"}}>
-          {props.title}
+          <a href={props.to} className='stretched-link text-reset text-decoration-none'>{props.title}</a>
         </Card.Title>
       </Card.Body>
     </Card>

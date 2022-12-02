@@ -1,6 +1,9 @@
 import React from 'react';
 import SingleMainPage from './pages/SingleMainPage';
-import HelpPage from './pages/HelpPage';
+import HelpPage from './pages/HelpPages/HelpPage';
+import ExchangeTransactionsHelp from './pages/HelpPages/Help.ExchangeTransactions';
+import ImportWalletHelp from './pages/HelpPages/Help.ImportWallet';
+import Contact from './pages/HelpPages/Help.Contact';
 import About from './pages/About';
 import {
     BrowserRouter,
@@ -14,6 +17,9 @@ function AppRouter(){
             <Routes>
                 <Route path="/" element={<SingleMainPage/>}/>
                 <Route path="/help" element={<HelpPage/>}/>
+                <Route path="/help/exchangetransactions" element={<ExchangeTransactionsHelp/>}></Route>
+                <Route path="/help/importwallet" element={<ImportWalletHelp/>}></Route>
+                <Route path="/help/contact" element={<Contact/>}></Route>
                 <Route path="/about" element={<About/>}/>
             </Routes>
         </BrowserRouter>
