@@ -1,95 +1,59 @@
-//Import memo, useCallback and useState hooks:
-import { memo, useCallback, useState } from 'react'
+// Import memo hook:
+import { memo } from 'react'
 
-// Import update method and yup:
-import update from 'immutability-helper'
-import * as yup from 'yup'
+// Import Field component:
+import { Field } from './form-field'
+import { TextArea } from './form-textarea'
+import { Button } from 'react-bootstrap'
+import {Container, Row, Col} from 'react-bootstrap';
 
-// Import Form component:
-import { Form } from './form'
+// Create the Field component:
+export const ContactForm = memo((props) => (
+  <form onSubmit={props.onSubmit} noValidate>
+    <Container>
+      <Row>
+        <Col>
+          <Field
+            labelText="First name"
+            fieldType="text"
+            fieldName="firstName"
+            fieldValue={props.values.firstName}
+            hasError={props.errors.firstName}
+            onFieldChange={props.onFieldChange}
+          />
+        </Col>
+        <Col>
+          <Field
+            labelText="Last name"
+            fieldType="text"
+            fieldName="lastName"
+            fieldValue={props.values.lastName}
+            hasError={props.errors.lastName}
+            onFieldChange={props.onFieldChange}
+          />
+        </Col>
+      <Row>
+        <Field
+          labelText="Email"
+          fieldType="email"
+          fieldName="email"
+          fieldValue={props.values.email}
+          hasError={props.errors.email}
+          onFieldChange={props.onFieldChange}
+        />
+      </Row>
+        <TextArea
+          labelText="What can I do for you?"
+          fieldName="message"
+          fieldValue={props.values.message}
+          hasError={props.errors.message}
+          onFieldChange={props.onFieldChange}
+        />
+      </Row>
+    </Container>
 
-// Create validation schema:
-const formSchema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
-  email: yup.string().email().required(),
-  password: yup.string().min(8).required(),
-})
-
-// Create the App component:
-const ContactForm = memo(() => {
-  // Create state for form values:
-  const [values, setValues] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  })
-  // Create state for form errors:
-  const [errors, setErrors] = useState({
-    firstName: false,
-    lastName: false,
-    email: false,
-    password: false,
-  })
-
-  // Create handler for input change event:
-  const onFieldChange = useCallback((fieldName, value) => {
-    setValues((prevValues) =>
-      update(prevValues, {
-        [fieldName]: {
-          $set: value,
-        },
-      })
-    )
-  }, [])
-
-  // Create handler for form submit event:
-  const onSubmit = useCallback(
-    async (event) => {
-      // Prevent form from submitting:
-      event.preventDefault()
-
-      // Check the schema if form is valid:
-      const isFormValid = await formSchema.isValid(values, {
-        abortEarly: false, // Prevent aborting validation after first error
-      })
-
-      if (isFormValid) {
-        // If form is valid, continue submission.
-        console.log('Form is legit')
-      } else {
-        // If form is not valid, check which fields are incorrect:
-        formSchema.validate(values, { abortEarly: false }).catch((err) => {
-          // Collect all errors in { fieldName: boolean } format:
-          const errors = err.inner.reduce((acc, error) => {
-            return {
-              ...acc,
-              [error.path]: true,
-            }
-          }, {})
-
-          // Update form errors state:
-          setErrors((prevErrors) =>
-            update(prevErrors, {
-              $set: errors,
-            })
-          )
-        })
-      }
-    },
-    [values]
-  )
-
-  // Render the form:
-  return (
-    <Form
-      values={values}
-      errors={errors}
-      onFieldChange={onFieldChange}
-      onSubmit={onSubmit}
-    />
-  )
-})
-
-export default ContactForm;
+    <Button variant="primary" type="submit">
+      Submit
+    </Button>
+  </form>
+))

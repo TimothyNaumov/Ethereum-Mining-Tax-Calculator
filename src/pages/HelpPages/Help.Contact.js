@@ -1,7 +1,7 @@
 import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap';
 import NavigationBar from '../../Components/NavigationBar';
-import ContactForm from './ContactForm.js';
+import ContactFormController from './ContactFormController.js';
 
 
 const Contact = () => {
@@ -18,11 +18,11 @@ const Contact = () => {
      <NavigationBar/>
      <div className='d-flex justify-content-center align-items-center'>
       <Container style={{width: "650px"}}>
-        <ContactForm/>
-        {/* <Row className='d-flex' align="center">
+        <Row className='d-flex' align="center">
           <h1 className='help-title-text'>Contact Me</h1>
         </Row>
-        <Row>
+        <ContactFormController/>
+        {/* <Row>
           <Form>
             <Form.Group className="mb-3" controlId="formFullName">
               <Form.Label style={{fontSize: "20px"}}>Name</Form.Label>
