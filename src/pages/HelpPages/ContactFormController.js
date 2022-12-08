@@ -10,7 +10,7 @@ import { ContactForm } from './ContactForm'
 
 // Create validation schema:
 const formSchema = yup.object().shape({
-  firstName: yup.string().required(),
+  firstName: yup.string().required('First name is required!'),
   lastName: yup.string().required(),
   email: yup.string().email().required(),
   message: yup.string().max(300).required()

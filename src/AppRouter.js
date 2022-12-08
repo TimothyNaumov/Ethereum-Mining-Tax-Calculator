@@ -5,14 +5,18 @@ import ExchangeTransactionsHelp from './pages/HelpPages/Help.ExchangeTransaction
 import ImportWalletHelp from './pages/HelpPages/Help.ImportWallet';
 import Contact from './pages/HelpPages/Help.Contact';
 import About from './pages/About';
+
 import {
     BrowserRouter,
     Routes,
     Route,
   } from "react-router-dom";
+import NavigationBar from './Components/NavigationBar';
 
 function AppRouter(){
     return (
+        <>
+        <NavigationBar/>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<SingleMainPage/>}/>
@@ -23,10 +27,8 @@ function AppRouter(){
                 <Route path="/about" element={<About/>}/>
             </Routes>
         </BrowserRouter>
+        </>
     )
 }
-
-
-
 
 export default AppRouter;

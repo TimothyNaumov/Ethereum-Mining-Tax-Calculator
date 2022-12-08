@@ -94,7 +94,6 @@ function MainPage(){
     
     return (
       <>
-        <NavigationBar/>
         <AddressInputView dispatch={dispatch}/>
         { state.shouldRenderWallet && 
             <div ref={ref}>

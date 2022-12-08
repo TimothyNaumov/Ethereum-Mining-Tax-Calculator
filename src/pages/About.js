@@ -4,6 +4,7 @@ import {Container, Row, Col} from 'react-bootstrap';
 import challenges from '../assets/AboutPageImages/thoughtprocess.svg'
 import eth from '../assets/AboutPageImages/ether.svg';
 import devImage from '../assets/AboutPageImages/devImage.svg';
+import ReCAPTCHA from 'react-google-recaptcha';
 
 const About = () => {
     useEffect(() => {
@@ -22,7 +23,6 @@ const About = () => {
 
   return (
     <>
-        <NavigationBar/>
         <div className="d-flex align-items-center">
             <Container fluid>
                 <Row className="justify-content-md-center" align="center">

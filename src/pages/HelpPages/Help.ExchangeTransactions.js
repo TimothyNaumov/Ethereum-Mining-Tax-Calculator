@@ -15,7 +15,7 @@ const ExchangeTransactionsHelp = () => {
                     </div>
                 </Row>
                 <Row>
-                <Accordion>
+                <Accordion style={{width:"1000px"}}>
                     <Accordion.Item eventKey="0">
                         <Accordion.Header>Where do I find my Coinbase exchange transactions?</Accordion.Header>
                         <Accordion.Body>

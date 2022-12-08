@@ -22,8 +22,6 @@ export const TextArea = memo((props) => {
               <p style={{color:'red', fontSize: "12px"}}>{`Please enter a message`}</p>
             )}
         </Form.Group>
-
-      
     </>
   )
 })

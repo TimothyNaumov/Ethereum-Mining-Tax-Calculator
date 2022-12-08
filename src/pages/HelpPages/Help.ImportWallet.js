@@ -2,6 +2,7 @@ import React from 'react'
 import {Container, Row} from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
 import NavigationBar from '../../Components/NavigationBar';
+import reCAPTCHA from "react-google-recaptcha";
 
 const ImportWalletHelp = () => {
   return (

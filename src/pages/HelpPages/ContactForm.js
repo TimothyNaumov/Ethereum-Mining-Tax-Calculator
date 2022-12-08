@@ -6,6 +6,7 @@ import { Field } from './form-field'
 import { TextArea } from './form-textarea'
 import { Button } from 'react-bootstrap'
 import {Container, Row, Col} from 'react-bootstrap';
+import ReCAPTCHA from "react-google-recaptcha"
 
 // Create the Field component:
 export const ContactForm = memo((props) => (
@@ -32,6 +33,7 @@ export const ContactForm = memo((props) => (
             onFieldChange={props.onFieldChange}
           />
         </Col>
+      </Row>
       <Row>
         <Field
           labelText="Email"
@@ -42,6 +44,7 @@ export const ContactForm = memo((props) => (
           onFieldChange={props.onFieldChange}
         />
       </Row>
+      <Row>
         <TextArea
           labelText="What can I do for you?"
           fieldName="message"
@@ -50,10 +53,18 @@ export const ContactForm = memo((props) => (
           onFieldChange={props.onFieldChange}
         />
       </Row>
+      <Row>
+        <ReCAPTCHA
+          sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+        />
+      </Row>
+      <Row style={{paddingLeft: "12px", paddingTop:"12px"}}>
+        <Button variant="primary" type="submit" style={{width: "100px"}}>
+          Submit
+        </Button>
+      </Row>
     </Container>
 
-    <Button variant="primary" type="submit">
-      Submit
-    </Button>
+    
   </form>
 ))
