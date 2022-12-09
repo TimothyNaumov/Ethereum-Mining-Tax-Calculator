@@ -1,12 +1,10 @@
 import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
-import NavigationBar from '../../Components/NavigationBar';
 
 const ExchangeTransactionsHelp = () => {
   return (
     <>
-        <NavigationBar/>
         <div className='d-flex justify-content-center'>
             <Container style={{paddingTop:"100px"}}>
                 <Row style={{paddingBottom: "25px"}}>

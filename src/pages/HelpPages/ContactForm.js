@@ -1,5 +1,5 @@
 // Import memo hook:
-import { memo } from 'react'
+import { memo, useRef } from 'react'
 
 // Import Field component:
 import { Field } from './form-field'
@@ -7,10 +7,27 @@ import { TextArea } from './form-textarea'
 import { Button } from 'react-bootstrap'
 import {Container, Row, Col} from 'react-bootstrap';
 import ReCAPTCHA from "react-google-recaptcha"
+import axios from 'axios';
 
 // Create the Field component:
-export const ContactForm = memo((props) => (
-  <form onSubmit={props.onSubmit} noValidate>
+export const ContactForm = memo((props) => {
+
+  const captchaRef = useRef(null)
+
+  async function checkCaptcha(){
+    const token = captchaRef.current.getValue();
+
+    console.log(token);
+
+    await axios.post('http://localhost:8080/verifyCaptcha', {token})
+        .then(res =>  console.log(res))
+        .catch((error) => {
+        console.log(error);
+        })
+  }
+
+  return(
+    <form onSubmit={props.onSubmit} noValidate>
     <Container>
       <Row>
         <Col>
@@ -56,6 +73,8 @@ export const ContactForm = memo((props) => (
       <Row>
         <ReCAPTCHA
           sitekey={process.env.REACT_APP_RECAPTCHA_SITE_KEY}
+          onChange={checkCaptcha}
+          ref={captchaRef}
         />
       </Row>
       <Row style={{paddingLeft: "12px", paddingTop:"12px"}}>
@@ -67,4 +86,5 @@ export const ContactForm = memo((props) => (
 
     
   </form>
-))
+  )
+})

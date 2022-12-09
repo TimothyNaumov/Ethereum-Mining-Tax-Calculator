@@ -1,5 +1,4 @@
 import React from 'react'
-import NavigationBar from '../../Components/NavigationBar';
 import {Container, Row, Col} from 'react-bootstrap';
 import HealthOptionCard from '../../Components/Help/HelpOptionCard';
 
@@ -7,7 +6,6 @@ import HealthOptionCard from '../../Components/Help/HelpOptionCard';
 const HelpPage = () => {
   return (
     <div>
-        <NavigationBar/>
         <div className="d-flex align-items-center" style={{height: "100%"}}>
             <Container>
                 <Row className='align-items-center' align="center">

@@ -1,17 +1,9 @@
 import React from 'react'
 import {Container, Row, Col} from 'react-bootstrap';
-import NavigationBar from '../../Components/NavigationBar';
 import ContactFormController from './ContactFormController.js';
 
 
 const Contact = () => {
-  function submitForm(e){
-    e.preventDefault();
-    let name = document.getElementById('formFullName').value
-    let emailAddress = document.getElementById('formEmail').value
-    let message = document.getElementById('formText').value
-    console.log(`${name} ${emailAddress} ${message}`);
-  }
 
   return (
     <>
