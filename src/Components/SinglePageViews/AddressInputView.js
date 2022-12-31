@@ -20,7 +20,7 @@ const AddressInputView = (props) => {
             </Row>
             <Row className="justify-content-md-center" align="center">
                 <p style={{fontSize: "28px"}}>Generate your 8949 form for Sales and Other Dispositions of Capital Assets using your Ethereum mining wallet and a list of transactions from your exchange</p>
-                <p className='main-page-disclaimer'>We do not collect or store any of your data. <a href="/privacy" target="_Blank">Learn more</a></p>
+                <p className='main-page-disclaimer'>We do not collect or store any of your data. <a href="/About" target="_Blank">Learn more</a></p>
             </Row>
             <Row className="justify-content-md-center" align="center" style={{paddingTop: "25px"}}>
                 <div className='demo-button'>
