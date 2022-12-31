@@ -7,7 +7,7 @@ function NavigationBar() {
         <Navbar bg="dark" variant='dark' sticky='top' expand="lg" collapseOnSelect>
             <Navbar.Brand>
                 <Nav.Link href='/'>
-                    <div style={{"padding-left": "10px"}}>
+                    <div style={{paddingLeft: "10px"}}>
                         <img src={logo} width="40px" alt="eth logo"/>
                     </div>
                 </Nav.Link>
